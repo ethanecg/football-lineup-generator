@@ -8,7 +8,7 @@ namespace ClassLibrary
     public class Team
     {
         private string _name;
-        private string _TeamFilePath;
+        private string _teamFilePath;
         private List<Player> _playerList;
 
         public string Name
@@ -26,7 +26,7 @@ namespace ClassLibrary
 
         public string TeamFilePath
         {
-            get { return _TeamFilePath; }
+            get { return _teamFilePath; }
             private set
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
@@ -40,7 +40,7 @@ namespace ClassLibrary
 
                     }
                 }
-                _TeamFilePath = $"..\\..\\..\\..\\Teams\\{value}.csv";
+                _teamFilePath = $"..\\..\\..\\..\\Teams\\{value}.csv";
             }
         }
 

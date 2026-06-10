@@ -3,10 +3,10 @@
   "WorkspaceRootPath": "C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\lineup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\classdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -16,31 +16,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Team.cs",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Team.cs",
-              "RelativeDocumentMoniker": "..\\ClassLibrary\\Team.cs",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Team.cs",
-              "RelativeToolTip": "..\\ClassLibrary\\Team.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAIA6wGwAAAANAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "LineUp.cs",
+              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\LineUp.cs",
+              "RelativeDocumentMoniker": "..\\ClassLibrary\\LineUp.cs",
+              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\LineUp.cs",
+              "RelativeToolTip": "..\\ClassLibrary\\LineUp.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-09T18:06:36.642Z"
+              "WhenOpened": "2026-06-10T14:50:22.485Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Player.cs",
-              "RelativeDocumentMoniker": "..\\ClassLibrary\\Player.cs",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Player.cs",
-              "RelativeToolTip": "..\\ClassLibrary\\Player.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowCcAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-09T18:00:54.468Z",
+              "DocumentIndex": 1,
+              "Title": "ClassDiagram.cd",
+              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassDiagram.cd",
+              "RelativeDocumentMoniker": "..\\ClassLibrary\\ClassDiagram.cd",
+              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassDiagram.cd",
+              "RelativeToolTip": "..\\ClassLibrary\\ClassDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2026-06-10T14:47:57.387Z",
               "EditorCaption": ""
             }
           ]
