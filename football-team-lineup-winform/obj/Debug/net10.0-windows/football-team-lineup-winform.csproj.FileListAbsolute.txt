@@ -1,0 +1,16 @@
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\bin\Debug\net10.0-windows\football-team-lineup-winform.exe
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\bin\Debug\net10.0-windows\football-team-lineup-winform.deps.json
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\bin\Debug\net10.0-windows\football-team-lineup-winform.runtimeconfig.json
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\bin\Debug\net10.0-windows\football-team-lineup-winform.dll
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\bin\Debug\net10.0-windows\football-team-lineup-winform.pdb
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football_team_lineup_winform.MainForm.resources
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.csproj.GenerateResource.cache
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.AssemblyInfoInputs.cache
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.AssemblyInfo.cs
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.csproj.CoreCompileInputs.cache
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.dll
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\refint\football-team-lineup-winform.dll
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.pdb
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.genruntimeconfig.cache
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\ref\football-team-lineup-winform.dll

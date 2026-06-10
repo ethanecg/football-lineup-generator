@@ -1,0 +1,32 @@
+# football-lineup-generator
+
+## football-{name of the team}.csv
+    This will contain all the players of a team with the player's positions and name
+    e.x., : Cristiano Ronaldo;ST
+            João Félix;AM,LW,ST
+    Players can have multiple positions.
+    The valid positions are : 
+        For forwards; ST,LW,RW,AM
+        For midfielders; MC,MR,ML,MD
+        For defenders; DM,DL,DC,DR
+        For goalers; G
+
+## lineup.lua
+    This will create and manage the lineup.
+    The lineup is a table that automatically add a football position in the table.
+    The user may choose any valid lineup.
+    e.x, : 4-3-3 (note that the goaler is not included)
+           4-1-2-3 (for a DM)
+           4-2-1-3 (for a AM)
+    All the modification to the lineup will happen in this file.
+
+## team.lua
+    This will contain a table of player depending on the team selected.
+    Will send this table to lineup.lua
+
+## main.lua
+    Select the team to modify or use it. There is also an option to add a new team (all the data are contained in a csv).
+    Contain a button for the instructions.
+    When you choose a team a lineup graphic will appear. Nothing his display until the lineup is valid.
+    Once its valid a graphic containhing block of the visible formation will appear and a button generate will appear.
+    When button generate appear call lineup.lua and fill the square with player's name.

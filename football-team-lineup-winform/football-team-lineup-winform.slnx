@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../ClassLibrary/ClassLibrary.csproj" Id="7b41ec7c-b5eb-45aa-a7d0-0ab43b581b47" />
+  <Project Path="football-team-lineup-winform.csproj" />
+</Solution>
