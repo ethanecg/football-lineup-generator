@@ -1,18 +1,22 @@
-﻿namespace ClassLibrary
+﻿using System.ComponentModel.Design;
+using System.Linq.Expressions;
+
+namespace ClassLibrary
 {
     public class Player
     {
-        private string _firstName;
-        private string _lastName;
-        private List<string> _fieldPositions;
-
-        private List<string> validFieldPositions = new List<string>() // This list is never modified
+        public static readonly List<string> VALID_FIELD_POSITIONS = new List<string>() // This list cannot be modified
         {
             "ST","LW","RW","AM",
             "MC","MR","ML","MD",
             "DM","DL","DC","DR",
             "G"
         };
+
+        private string _firstName;
+        private string _lastName;
+        private List<string> _fieldPositions;
+
 
         public string FirstName
         {
@@ -56,7 +60,7 @@
                 foreach (string fp in value) // Check if the fp match a value in validFieldPositions.
                 {
                     bool valid = false;
-                    foreach (string vfp in validFieldPositions)
+                    foreach (string vfp in VALID_FIELD_POSITIONS)
                     {
                         if (fp == vfp)
                         {
@@ -74,9 +78,26 @@
 
         public Player(string fullName, List<string> fieldPositionList)
         {
+            if (fullName == null)
+            {
+                throw new ArgumentNullException("The full name cannot be null");
+            }
             string[] nameArray = fullName.Split(" ");
             FirstName = nameArray[0];
-            LastName = nameArray[1];
+            string lastName = "";
+            // In case the player have two last name.
+            for (int i = 1; i < nameArray.Count(); i++)
+            {
+                if (i == nameArray.Count() - 1)
+                {
+                    lastName += $"{nameArray[i]}";
+                }
+                else
+                {
+                    lastName += $"{nameArray[i] } ";
+                }
+            }
+            LastName = lastName;
 
             FieldPositions = fieldPositionList;
         }
@@ -85,7 +106,7 @@
         /// Transform the player so it can be in written in the .csv file.
         /// </summary>
         /// <returns></returns>
-        public string playerInCsvFormat()
+        public string PlayerInCsvFormat()
         {
             int count = 0;
 

@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="../ClassLibrary/ClassLibrary.csproj" Id="7b41ec7c-b5eb-45aa-a7d0-0ab43b581b47" />
+  <Project Path="../TestClass/TestClass.csproj" Id="d6df484f-2799-4bfb-88d8-392eff105593" />
   <Project Path="football-team-lineup-winform.csproj" />
 </Solution>
