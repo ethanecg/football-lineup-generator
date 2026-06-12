@@ -101,6 +101,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="filePath"></param>
         /// <exception cref="FormatException">Thrown if the a line in the file is in a incorrect format.</exception>
+        /// <exception cref="Exception">Thrown if the player is in an incorrect format.</exception>
         public void AddFileToPlayerList()
         {
             using (StreamReader reader = new StreamReader(TeamFilePath))
@@ -113,18 +114,28 @@ namespace ClassLibrary
 
                     if (playerArray.Count() != 2)
                     {
-                        throw new FormatException("Argument");
+                        throw new FormatException("A player in the file is in an inccorect format. Make sure there is only one ';'.");
                     }
                         
                     string playerFullName = playerArray[0];
                     string[] playerFieldPositionArray = playerArray[1].Split(",");
 
-                    PlayerList.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
+                    try
+                    {
+                        PlayerList.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
             }
         }
 
-        public void ClearAllThePlayersInTheFileAndResetPlayers()
+        /// <summary>
+        /// Clear the file and Clear the list 'PlayerList'.
+        /// </summary>
+        public void ClearAllThePlayersInTheFileAndClearPlayerList()
         {
             using (StreamWriter writer = new StreamWriter(TeamFilePath, append: false))
             {
