@@ -72,7 +72,7 @@ namespace TestClass
         [TestMethod]
         public void TestCreatePlayerWithInvalidFieldPositions()
         {
-            Assert.Throws<ArgumentException>(() => new Player(validName, new List<string>() { "ST", "INV"}));
+            Assert.Throws<ArgumentException>(() => new Player(validName, new List<string>() {"ST", "INV"}));
         }
 
         [TestMethod]
@@ -82,6 +82,5 @@ namespace TestClass
 
             Assert.AreEqual($"{validName};ST,MC", player.PlayerInCsvFormat());
         }
-
     }
 }

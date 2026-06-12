@@ -65,9 +65,9 @@ namespace ClassLibrary
             get { return _playerList; }
             set
             {
-                if (value == null || value.Count == 0)
+                if (value == null)
                 {
-                    throw new ArgumentNullException("The list of player cannot be empty or null.");
+                    throw new ArgumentNullException("The list of player cannot be null.");
                 }
                 _playerList = value;
             }
@@ -77,14 +77,15 @@ namespace ClassLibrary
         {
             Name = name;
             TeamFilePath = Name;
-            AddFileToPlayerList(TeamFilePath);
+            PlayerList = new List<Player>();
+            AddFileToPlayerList();
         }
 
         /// <summary>
         /// Add new players to the team file using the function Player.playerInCsvFormat().
         /// </summary>
         /// <param name="filePath"> The team file path.</param>>
-        public void AddPlayerListToFile(string filePath)
+        public void AddPlayerListToFile()
         {
             using (StreamWriter writer = new StreamWriter(TeamFilePath))
             {
@@ -99,7 +100,8 @@ namespace ClassLibrary
         /// Add the players in the file to the PlayerList.
         /// </summary>
         /// <param name="filePath"></param>
-        public void AddFileToPlayerList(string filePath)
+        /// <exception cref="FormatException">Thrown if the a line in the file is in a incorrect format.</exception>
+        public void AddFileToPlayerList()
         {
             using (StreamReader reader = new StreamReader(TeamFilePath))
             {
@@ -109,12 +111,26 @@ namespace ClassLibrary
 
                     string[] playerArray = playerString.Split(';'); //  e.x, [Ousmane Dembélé] , [ST,RW]
 
+                    if (playerArray.Count() != 2)
+                    {
+                        throw new FormatException("Argument");
+                    }
+                        
                     string playerFullName = playerArray[0];
                     string[] playerFieldPositionArray = playerArray[1].Split(",");
 
                     PlayerList.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
                 }
             }
+        }
+
+        public void ClearAllThePlayersInTheFileAndResetPlayers()
+        {
+            using (StreamWriter writer = new StreamWriter(TeamFilePath, append: false))
+            {
+
+            }
+            PlayerList.Clear();
         }
     }
 }
