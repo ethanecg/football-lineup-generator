@@ -149,6 +149,12 @@ namespace TestClass
                 }
             }
             Assert.AreEqual(0, count);
+
+            // Delete the file.
+            if (File.Exists(team.TeamFilePath))
+            {
+                File.Delete(team.TeamFilePath);
+            }
         }
     }
 }
