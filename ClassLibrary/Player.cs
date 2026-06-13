@@ -47,7 +47,8 @@ namespace ClassLibrary
         /// <summary>
         /// List of field positions. The valid positions are in validFieldPositions.
         /// </summary>
-        /// <exception cref="ArgumentException">Thrown if the field position dont match a value in validFieldPositions</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the list is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if the field position dont match a value in validFieldPositions.</exception>
         public List<string> FieldPositions
         {
             get { return _fieldPositions; }
@@ -76,6 +77,9 @@ namespace ClassLibrary
             }
         }
 
+        /// <param name="fullName">The first name and last name of a player separaated by a space.</param>
+        /// <param name="fieldPositionList"></param>
+        /// <exception cref="ArgumentNullException">Thrown if the full name is null.</exception>
         public Player(string fullName, List<string> fieldPositionList)
         {
             if (fullName == null)
