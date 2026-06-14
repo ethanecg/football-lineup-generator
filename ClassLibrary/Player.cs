@@ -7,9 +7,11 @@ namespace ClassLibrary
     {
         public static readonly List<string> VALID_FIELD_POSITIONS = new List<string>() // This list cannot be modified
         {
-            "ST","LW","RW","AM",
-            "MC","MR","ML","MD",
-            "DM","DL","DC","DR",
+            "ST","LW","RW",
+            "AM",
+            "MC","MR","ML","MD", 
+            "DM",
+            "DL","DC","DR",
             "G"
         };
 

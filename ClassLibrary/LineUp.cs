@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,16 @@ namespace ClassLibrary
 {
     public class LineUp
     {
+        public static readonly List<string> VALID_FIELD_POSITIONS = new List<string>() // This list cannot be modified
+        {
+            "ST","LW","RW",
+            "AM",
+            "MC","MR","ML","MD",
+            "DM",
+            "DL","DC","DR",
+            "G"
+        };
+
         private string _lineUpText;
         private List<List<Player>> _lineUpList; // Multiple list in a list, can contain null.
         private Team _team;
@@ -83,7 +94,7 @@ namespace ClassLibrary
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("The team cannot be null");
+                    throw new ArgumentNullException("" + "The team cannot be null");
                 }
                 _team = value;
             }
@@ -113,49 +124,81 @@ namespace ClassLibrary
         /// </summary>
         public void AddGoalerToLineUpArrayRandomly()
         {
-            List<Player> GoalerList = new List<Player>();
+            List<Player> goalerList = new List<Player>();
             foreach (Player p in Team.PlayerList)
             {
                 if (p.FieldPositions.Contains("G") && !CheckIfPlayerAlreadyInLineUp(p))
                 {
-                    GoalerList.Add(p);
+                    goalerList.Add(p);
                 }
             }
             // If there's no goaler just take the whole player list.
-            if (GoalerList.Count() == 0)
+            if (goalerList.Count() < 1)
             {
                 foreach (Player p in Team.PlayerList)
                 {
                     if (!CheckIfPlayerAlreadyInLineUp(p))
                     {
-                        GoalerList.Add(p);
+                        goalerList.Add(p);
                     }
                 }
             }
 
             // Randomly choose a goaler.
             Random random = new Random();
-            int randomindex = random.Next(0, GoalerList.Count());
+            int randomindex = random.Next(0, goalerList.Count());
 
             // Add the goaler to the LineUpArray
-            LineUpList[0].Add(GoalerList[randomindex]);
+            LineUpList[0].Add(goalerList[randomindex]);
         }
 
         public void AddDefenderToLineUpArrayRandomly()
         {
-            List<Player> DefenderList = new List<Player>();
-            if (LineUpText.Split('-').Length == 4) // e.x, 4-4-2
+            // The defenders are always on the index 1.
+            List<Player> defenderList = ReturnListOfPlayerBasedOnPosition(new List<string> { "DL", "DC", "DR" }, Team.PlayerList);
+            
+            if (defenderList.Count < LineUpList[1].Count)
             {
-
+                // Add any player in the list
+                ReturnListOfPlayerBasedOnPosition(VALID_FIELD_POSITIONS, defenderList);
             }
-            foreach (Player p in Team.PlayerList)
+
+            for (int c = 0; c < LineUpList[1].Count;c++)
             {
-                if (p.FieldPositions.Contains("G"))
+                // If there is a center.
+                if (LineUpList[1].Count % 2 != 0)
                 {
-                    DefenderList.Add(p);
+                    // If the player is left position.
+                    if ((c / 2) < (LineUpList[1].Count / 2) + 1)
+                    {
+                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> {"DL"}, defenderList));
+                    }
+                    // If the player is center position.
+                    if ((c / 2) == (LineUpList[1].Count / 2) + 1)
+                    {
+                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DC" }, defenderList));
+                    }
+                    // If the center is right position.
+                    if ((c / 2) > (LineUpList[1].Count / 2) + 1)
+                    {
+                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList));
+                    }
+                }
+                // If there is no center.
+                else
+                {
+                    // If the player is left position.
+                    if ((c / 2) <= (LineUpList[1].Count / 2))
+                    {
+                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DL" }, defenderList));
+                    }
+                    // If the player is right position.
+                    if ((c / 2) > (LineUpList[1].Count / 2))
+                    {
+                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList));
+                    }
                 }
             }
-            
         }
 
         public bool VerifyIfTheTeamHaveAtLeast11Players()
@@ -212,6 +255,49 @@ namespace ClassLibrary
                     LineUpList[r][c] = null;
                 }
             }
+        }
+
+        /// <summary>
+        /// Search through a list of player and return a list of player with the same position. Also check if the player is already contained in the LineUpList.
+        /// </summary>
+        /// <param name="position">The position of the player.</param>
+        /// <param name="playerList">A list of player.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Thrown if the list of player is null or empty.</exception>
+        public List<Player> ReturnListOfPlayerBasedOnPosition(List<string> positionList, List<Player> playerList)
+        {
+            if (playerList == null || playerList.Count == 0)
+            {
+                throw new ArgumentNullException("" + "The player list is null or empty");
+            }
+
+            List<Player> positionPlayerList = new List<Player>();
+
+            foreach (string position in positionList)
+            {
+                foreach (Player player in playerList)
+                {
+                    if (player.FieldPositions.Contains(position) && !CheckIfPlayerAlreadyInLineUp(player))
+                    {
+                        positionPlayerList.Add(player);
+                    }
+                }
+            }
+
+            return positionPlayerList;
+        }
+
+        /// <summary>
+        /// Return a random player in a list of player.
+        /// </summary>
+        /// <param name="playerList">A list of player based on their position. Use with the method ReturnListOfPlayerBasedOnPosition.</param>
+        /// <returns></returns>
+        public Player ReturnRandomPlayer(List<Player> playerList)
+        {
+            Random random = new Random();
+            int randomindex = random.Next(0, playerList.Count());
+
+            return playerList[randomindex];
         }
     }
 }
