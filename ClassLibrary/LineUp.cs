@@ -105,10 +105,10 @@ namespace ClassLibrary
             LineUpText = lineUpText;
 
             List<List<Player>> tempLineUpList = new List<List<Player>>();
-            for (int r = 1; r < LineUpText.Split('-').Count(); r++)
+            for (int r = 0; r < LineUpText.Split('-').Count(); r++)
             {
                 List<Player> listOfPlayers = new List<Player>();
-                for (int c = 1; c < LineUpText.Split("-")[r].Count(); c++)
+                for (int c = 0; c < int.Parse(LineUpText.Split("-")[r]); c++)
                 {
                     listOfPlayers.Add(null);
                 }
@@ -124,24 +124,13 @@ namespace ClassLibrary
         /// </summary>
         public void AddGoalerToLineUpArrayRandomly()
         {
-            List<Player> goalerList = new List<Player>();
-            foreach (Player p in Team.PlayerList)
-            {
-                if (p.FieldPositions.Contains("G") && !CheckIfPlayerAlreadyInLineUp(p))
-                {
-                    goalerList.Add(p);
-                }
-            }
+            List<Player> goalerList = ReturnListOfPlayerBasedOnPosition(new List<string> { "G" }, Team.PlayerList);
+
             // If there's no goaler just take the whole player list.
             if (goalerList.Count() < 1)
             {
-                foreach (Player p in Team.PlayerList)
-                {
-                    if (!CheckIfPlayerAlreadyInLineUp(p))
-                    {
-                        goalerList.Add(p);
-                    }
-                }
+                // Add any player in the list
+                ReturnListOfPlayerBasedOnPosition(VALID_FIELD_POSITIONS, goalerList);
             }
 
             // Randomly choose a goaler.
@@ -171,17 +160,18 @@ namespace ClassLibrary
                     // If the player is left position.
                     if ((c / 2) < (LineUpList[1].Count / 2) + 1)
                     {
-                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> {"DL"}, defenderList));
+                        // Add the goaler to the LineUpArray
+                        LineUpList[1].Add(ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DL" }, defenderList)));
                     }
                     // If the player is center position.
                     if ((c / 2) == (LineUpList[1].Count / 2) + 1)
                     {
-                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DC" }, defenderList));
+                        LineUpList[1].Add(ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DC" }, defenderList)));
                     }
                     // If the center is right position.
                     if ((c / 2) > (LineUpList[1].Count / 2) + 1)
                     {
-                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList));
+                        LineUpList[1].Add(ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList)));
                     }
                 }
                 // If there is no center.
@@ -190,12 +180,12 @@ namespace ClassLibrary
                     // If the player is left position.
                     if ((c / 2) <= (LineUpList[1].Count / 2))
                     {
-                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DL" }, defenderList));
+                        LineUpList[1].Add(ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DL" }, defenderList)));
                     }
                     // If the player is right position.
                     if ((c / 2) > (LineUpList[1].Count / 2))
                     {
-                        ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList));
+                        LineUpList[1].Add(ReturnRandomPlayer(ReturnListOfPlayerBasedOnPosition(new List<string> { "DR" }, defenderList)));
                     }
                 }
             }

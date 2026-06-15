@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("football-team-lineup-winform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cda1a15b25e4f7d87f9bb826e18c997cebe96ebf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f153becd569ec60965c364701d1f3249338756fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("football-team-lineup-winform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("football-team-lineup-winform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
