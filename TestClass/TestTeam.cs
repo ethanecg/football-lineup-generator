@@ -86,7 +86,7 @@ namespace TestClass
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    Assert.AreEqual($"{team.PlayerList[0].PlayerInCsvFormat()}", line);
+                    Assert.AreEqual($"{team.PlayerList[0].ToCsvFormat()}", line);
                 }
             }
 
@@ -108,7 +108,7 @@ namespace TestClass
 
             using (StreamWriter writer = new StreamWriter(team.TeamFilePath))
             {
-                writer.WriteLine($"{player.PlayerInCsvFormat()}");
+                writer.WriteLine($"{player.ToCsvFormat()}");
             }
 
             team.AddFileToPlayerList();
@@ -116,7 +116,7 @@ namespace TestClass
             List<Player> expectedValue = new List<Player>();
             expectedValue.Add(player);
 
-            Assert.AreEqual(expectedValue[0].PlayerInCsvFormat(), team.PlayerList[0].PlayerInCsvFormat());
+            Assert.AreEqual(expectedValue[0].ToCsvFormat(), team.PlayerList[0].ToCsvFormat());
 
             // Delete the file.
             if (File.Exists(team.TeamFilePath))

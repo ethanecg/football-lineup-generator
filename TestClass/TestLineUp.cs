@@ -88,5 +88,47 @@ namespace TestClass
                 File.Delete(validTeam.TeamFilePath);
             }
         }
+
+        [TestMethod]
+        public void TestCreateInvalidLineUp()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid}");
+            validTeam.PlayerList = validListOfPlayer;
+            validTeam.AddPlayerListToFile();
+
+            LineUp validLineup = new LineUp("4-4-2", validTeam);
+
+            /*
+                { null }
+                { null null null null }
+                { null null null null }
+                { null null }
+            */
+
+            Assert.AreEqual(4, validLineup.LineUpList.Count, "The lineUpList did not get the expected count.");
+            for (int r = 0; r < validLineup.LineUpList.Count; r++)
+            {
+                switch (r)
+                {
+                    case 0:
+                        Assert.AreEqual(1, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
+                        break;
+                    case 1:
+                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
+                        break;
+                    case 2:
+                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
+                        break;
+                    case 3:
+                        Assert.AreEqual(2, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
+                        break;
+                }
+            }
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
     }
 }

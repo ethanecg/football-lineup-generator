@@ -80,7 +80,7 @@ namespace TestClass
         {
             Player player = new Player(validName, validPositions);
 
-            Assert.AreEqual($"{validName};ST,MC", player.PlayerInCsvFormat());
+            Assert.AreEqual($"{validName};ST,MC", player.ToCsvFormat());
         }
     }
 }

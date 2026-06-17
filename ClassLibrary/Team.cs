@@ -91,7 +91,7 @@ namespace ClassLibrary
             {
                 foreach (Player p in PlayerList)
                 {
-                    writer.WriteLine(p.PlayerInCsvFormat());
+                    writer.WriteLine(p.ToCsvFormat());
                 }
             }
         }

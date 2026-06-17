@@ -11,7 +11,7 @@ namespace ClassLibrary
         {
             "ST","LW","RW",
             "AM",
-            "MC","MR","ML","MD",
+            "ML","MC","MR",
             "DM",
             "DL","DC","DR",
             "G"

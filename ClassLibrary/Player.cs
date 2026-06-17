@@ -1,25 +1,16 @@
 ﻿using System.ComponentModel.Design;
 using System.Linq.Expressions;
+using ClassLibrary;
 
 namespace ClassLibrary
 {
     public class Player
     {
-        public static readonly List<string> VALID_FIELD_POSITIONS = new List<string>() // This list cannot be modified
-        {
-            "ST","LW","RW",
-            "AM",
-            "MC","MR","ML","MD", 
-            "DM",
-            "DL","DC","DR",
-            "G"
-        };
-
         private string _firstName;
         private string _lastName;
         private List<string> _fieldPositions;
 
-
+        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
         public string FirstName
         {
             get { return _firstName; }
@@ -27,12 +18,13 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException("The name of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(value), "The first name of the player cannot be empty or null.");
                 }
                 _firstName = value;
             }
         }
 
+        /// <exception cref="ArgumentNullException">Thrown if the last name of the player is empty or null.</exception>
         public string LastName
         {
             get { return _lastName; }
@@ -40,17 +32,15 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException("The name of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(value), "The last name of the player cannot be empty or null.");
                 }
                 _lastName = value;
             }
         }
 
-        /// <summary>
-        /// List of field positions. The valid positions are in validFieldPositions.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown if the list is null or empty.</exception>
-        /// <exception cref="ArgumentException">Thrown if the field position dont match a value in validFieldPositions.</exception>
+        /// <summary>Check if the field positions are allowed and make sure the player have at least 1.</summary>
+        /// <exception cref="ArgumentNullException">Thrown if the list of field positions is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if a field position is not allowed.</exception>
         public List<string> FieldPositions
         {
             get { return _fieldPositions; }
@@ -58,14 +48,14 @@ namespace ClassLibrary
             {
                 if (value == null || value.Count == 0)
                 {
-                    throw new ArgumentNullException("The name of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(value) ,"The name of the player cannot be empty or null.");
                 }
                 foreach (string fp in value) // Check if the fp match a value in validFieldPositions.
                 {
                     bool valid = false;
-                    foreach (string vfp in VALID_FIELD_POSITIONS)
+                    foreach (string vfp in AllowedFieldPositions.VALID_FIELD_POSITIONS)
                     {
-                        if (fp == vfp)
+                        if (fp != vfp)
                         {
                             valid = true;
                         }
@@ -79,14 +69,14 @@ namespace ClassLibrary
             }
         }
 
-        /// <param name="fullName">The first name and last name of a player separaated by a space.</param>
-        /// <param name="fieldPositionList"></param>
+        /// <param name="fullName">The first name and last name of a player separated by a space.</param>
+        /// <param name="fieldPositions">A list of allowed field positions.</param>
         /// <exception cref="ArgumentNullException">Thrown if the full name is null.</exception>
-        public Player(string fullName, List<string> fieldPositionList)
+        public Player(string fullName, List<string> fieldPositions)
         {
             if (fullName == null)
             {
-                throw new ArgumentNullException("The full name cannot be null");
+                throw new ArgumentNullException(nameof(fullName), "The full name cannot be null");
             }
             string[] nameArray = fullName.Split(" ");
             FirstName = nameArray[0];
@@ -100,19 +90,16 @@ namespace ClassLibrary
                 }
                 else
                 {
-                    lastName += $"{nameArray[i] } ";
+                    lastName += $"{nameArray[i]} ";
                 }
             }
             LastName = lastName;
-
-            FieldPositions = fieldPositionList;
+            FieldPositions = fieldPositions;
         }
 
-        /// <summary>
-        /// Transform the player so it can be in written in the .csv file.
-        /// </summary>
+        /// <summary>Transform the player into a text so it can be store in a csv file.</summary>
         /// <returns></returns>
-        public string PlayerInCsvFormat()
+        public string ToCsvFormat()
         {
             int count = 0;
 
