@@ -59,9 +59,9 @@ namespace TestClass
 
             Team team = new Team(validTeamName);
 
-            team.PlayerList.Add(new Player(validPlayerName, validPositions));
+            team.Players.Add(new Player(validPlayerName, validPositions));
 
-            Assert.AreEqual(1, team.PlayerList.Count());
+            Assert.AreEqual(1, team.Players.Count());
 
             // Delete the file.
             if (File.Exists(team.TeamFilePath))
@@ -77,16 +77,16 @@ namespace TestClass
 
             Team team = new Team(validTeamName);
 
-            team.PlayerList.Add(new Player(validPlayerName, validPositions));
+            team.Players.Add(new Player(validPlayerName, validPositions));
 
-            team.AddPlayerListToFile();
+            team.SavePlayerToFile();
 
             using (StreamReader reader = new StreamReader(team.TeamFilePath))
             {
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    Assert.AreEqual($"{team.PlayerList[0].ToCsvFormat()}", line);
+                    Assert.AreEqual($"{team.Players[0].ToCsvFormat()}", line);
                 }
             }
 
@@ -111,12 +111,12 @@ namespace TestClass
                 writer.WriteLine($"{player.ToCsvFormat()}");
             }
 
-            team.AddFileToPlayerList();
+            team.SavePlayerToFile();
 
             List<Player> expectedValue = new List<Player>();
             expectedValue.Add(player);
 
-            Assert.AreEqual(expectedValue[0].ToCsvFormat(), team.PlayerList[0].ToCsvFormat());
+            Assert.AreEqual(expectedValue[0].ToCsvFormat(), team.Players[0].ToCsvFormat());
 
             // Delete the file.
             if (File.Exists(team.TeamFilePath))
@@ -134,11 +134,11 @@ namespace TestClass
 
             Player player = new Player(validPlayerName, validPositions);
 
-            team.PlayerList.Add(player);
+            team.Players.Add(player);
 
-            team.ClearAllThePlayersInTheFileAndClearPlayerList();
+            team.EmptyFileAndClearPlayers();
 
-            Assert.AreEqual(0, team.PlayerList.Count());
+            Assert.AreEqual(0, team.Players.Count());
 
             int count = 0;
             using (StreamReader reader = new StreamReader(team.TeamFilePath))

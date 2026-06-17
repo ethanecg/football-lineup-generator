@@ -5,18 +5,12 @@ using System.IO;
 
 namespace ClassLibrary
 {
-    /// <summary>
-    /// This class is used to read, write and create in a {team}.csv file to manage a list of players in the team.
-    /// </summary>
     public class Team
     {
         private string _name;
         private string _teamFilePath; // e.x, ..\..\..\..\Teams\arsenal.csv
-        private List<Player> _playerList;
+        private List<Player> _players;
 
-        /// <summary>
-        /// The name of the team, make the name in lower case. It will be used to name the .csv file.
-        /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when the name is empty or null.</exception>
         public string Name
         {
@@ -25,16 +19,14 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException("The name of the team cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(value), "The name of the team cannot be empty or null.");
                 }
                 _name = value.ToLower();
             }
         }
 
-        /// <summary>
-        /// Create a new file using the name of the team e.x, {name.csv}. If the file already exist, do nothing.
-        /// </summary>
-        /// <param name="value">the name of the team</param>
+        /// <summary>Set file location using the name of the team e.x, {name.csv}. If the file don't exist, create it.</summary>
+        /// <param name="value">The name of the team.</param>
         /// <exception cref="ArgumentNullException">Thrown when the value is null or empty.</exception>
         public string TeamFilePath
         {
@@ -43,33 +35,30 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException("The file of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(value), "The file of the player cannot be empty or null.");
                 }
-                else if (!File.Exists($"..\\..\\..\\..\\Teams\\{value}.csv"))
-                {
-                    using (File.Create($"..\\..\\..\\..\\Teams\\{value}.csv"))
-                    {
 
-                    }
+                value = value.Trim(); // Avoid having name written with multiple spaces at the start and at the end.
+
+                if (!File.Exists($"..\\..\\..\\..\\Teams\\{value}.csv"))
+                {
+                    using (File.Create($"..\\..\\..\\..\\Teams\\{value}.csv")) { }
                 }
                 _teamFilePath = $"..\\..\\..\\..\\Teams\\{value}.csv";
             }
         }
 
-        /// <summary>
-        /// A list of players.
-        /// </summary>
-        /// <param name="value">A list of players that are in the TeamFilePath.</param>
-        public List<Player> PlayerList
+        /// <exception cref="ArgumentNullException">Thrown if the list is null.</exception>
+        public List<Player> Players
         {
-            get { return _playerList; }
+            get { return _players; }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("The list of player cannot be null.");
+                    throw new ArgumentNullException(nameof(value), "The list of player cannot be null.");
                 }
-                _playerList = value;
+                _players = value;
             }
         }
 
@@ -77,32 +66,26 @@ namespace ClassLibrary
         {
             Name = name;
             TeamFilePath = Name;
-            PlayerList = new List<Player>();
-            AddFileToPlayerList();
+            Players = new List<Player>();
+            LoadPlayersFromFile();
         }
 
-        /// <summary>
-        /// Add new players to the team file using the function Player.playerInCsvFormat().
-        /// </summary>
-        /// <param name="filePath"> The team file path.</param>>
-        public void AddPlayerListToFile()
+        /// <summary>Write all players contain in 'Players' in the team file.</summary>
+        public void SavePlayerToFile()
         {
             using (StreamWriter writer = new StreamWriter(TeamFilePath))
             {
-                foreach (Player p in PlayerList)
+                foreach (Player p in Players)
                 {
                     writer.WriteLine(p.ToCsvFormat());
                 }
             }
         }
       
-        /// <summary>
-        /// Add the players in the file to the PlayerList.
-        /// </summary>
-        /// <param name="filePath"></param>
+        /// <summary>Read the file and add players wich are in it.</summary>
         /// <exception cref="FormatException">Thrown if the a line in the file is in a incorrect format.</exception>
         /// <exception cref="Exception">Thrown if the player is in an incorrect format.</exception>
-        public void AddFileToPlayerList()
+        public void LoadPlayersFromFile()
         {
             using (StreamReader reader = new StreamReader(TeamFilePath))
             {
@@ -122,7 +105,7 @@ namespace ClassLibrary
 
                     try
                     {
-                        PlayerList.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
+                        Players.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
                     }
                     catch (Exception ex)
                     {
@@ -132,16 +115,11 @@ namespace ClassLibrary
             }
         }
 
-        /// <summary>
-        /// Clear the file and Clear the list 'PlayerList'.
-        /// </summary>
-        public void ClearAllThePlayersInTheFileAndClearPlayerList()
+        /// <summary>Clear the file and Clear the list 'PlayerList'.</summary>
+        public void EmptyFileAndClearPlayers()
         {
-            using (StreamWriter writer = new StreamWriter(TeamFilePath, append: false))
-            {
-
-            }
-            PlayerList.Clear();
+            using (StreamWriter writer = new StreamWriter(TeamFilePath, append: false)) { }
+            Players.Clear();
         }
     }
 }

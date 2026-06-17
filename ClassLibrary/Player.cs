@@ -98,7 +98,6 @@ namespace ClassLibrary
         }
 
         /// <summary>Transform the player into a text so it can be store in a csv file.</summary>
-        /// <returns></returns>
         public string ToCsvFormat()
         {
             int count = 0;

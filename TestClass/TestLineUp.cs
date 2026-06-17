@@ -51,8 +51,8 @@ namespace TestClass
         public void TestCreateValidLineUp()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid}");
-            validTeam.PlayerList = validListOfPlayer;
-            validTeam.AddPlayerListToFile();
+            validTeam.Players = validListOfPlayer;
+            validTeam.SavePlayerToFile();
 
             LineUp validLineup = new LineUp("4-4-2", validTeam);
 
@@ -93,8 +93,8 @@ namespace TestClass
         public void TestCreateInvalidLineUp()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid}");
-            validTeam.PlayerList = validListOfPlayer;
-            validTeam.AddPlayerListToFile();
+            validTeam.Players = validListOfPlayer;
+            validTeam.SavePlayerToFile();
 
             LineUp validLineup = new LineUp("4-4-2", validTeam);
 

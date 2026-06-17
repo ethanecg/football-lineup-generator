@@ -124,7 +124,7 @@ namespace ClassLibrary
         /// </summary>
         public void AddGoalerToLineUpArrayRandomly()
         {
-            List<Player> goalerList = ReturnListOfPlayerBasedOnPosition(new List<string> { "G" }, Team.PlayerList);
+            List<Player> goalerList = ReturnListOfPlayerBasedOnPosition(new List<string> { "G" }, Team.Players);
 
             // If there's no goaler just take the whole player list.
             if (goalerList.Count() < 1)
@@ -144,7 +144,7 @@ namespace ClassLibrary
         public void AddDefenderToLineUpArrayRandomly()
         {
             // The defenders are always on the index 1.
-            List<Player> defenderList = ReturnListOfPlayerBasedOnPosition(new List<string> { "DL", "DC", "DR" }, Team.PlayerList);
+            List<Player> defenderList = ReturnListOfPlayerBasedOnPosition(new List<string> { "DL", "DC", "DR" }, Team.Players);
             
             if (defenderList.Count < LineUpList[1].Count)
             {
@@ -206,7 +206,7 @@ namespace ClassLibrary
                 }
             }
             // For a bugtest to check if it the team can desync from its file to his list.
-            if (Team.PlayerList.Count != count)
+            if (Team.Players.Count != count)
             {
                 return false;
             }
