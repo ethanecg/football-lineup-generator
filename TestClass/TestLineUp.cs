@@ -22,26 +22,26 @@ namespace TestClass
             // Fullbacks / Wingbacks (DL, DR)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DL" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DR" }),
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "DL", "DR" }), // Versatile Fullback
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "DL", "DR" }),
 
             // Defensive Midfielders (DM)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM" }),
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM", "DC" }), // Defensive Midfielder / Center Back
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM", "DC" }),
 
             // Central & Side Midfielders (MC, ML, MR, DM)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "MC" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "MC" }),
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "ML", "MR" }), // Wide Midfielder
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "ML", "MR" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM" }),       
 
             // Attacking Midfielders (AM)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "AM" }),
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "AM", "MC" }), // Playmaker
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "AM", "MC" }),
 
             // Wingers (LW, RW)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "LW" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "RW" }),
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "LW", "RW", "ST" }), // Versatile Attacker
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "LW", "RW", "ST" }),
 
             // Strikers (ST)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "ST" })
@@ -79,13 +79,13 @@ namespace TestClass
         }
 
         [TestMethod]
-        public void TestCreateLineupOfTwoRowsLineup()
+        public void TestCreateLineupOfThreeRowsLineup()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<FormatException>(() => new Lineup("5-5", validTeam));
+            Assert.Throws<FormatException>(() => new Lineup("1-5-5", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -94,13 +94,13 @@ namespace TestClass
         }
 
         [TestMethod]
-        public void TestCreateLineupOfSixRowsLineup()
+        public void TestCreateLineupOfSevenRowsLineup()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<FormatException>(() => new Lineup("2-2-2-2-1-1", validTeam));
+            Assert.Throws<FormatException>(() => new Lineup("1-2-2-2-2-1-1", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -115,7 +115,7 @@ namespace TestClass
             validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<FormatException>(() => new Lineup("4-A-2", validTeam));
+            Assert.Throws<FormatException>(() => new Lineup("1-4-A-2", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -124,13 +124,13 @@ namespace TestClass
         }
 
         [TestMethod]
-        public void TestCreateLineupOfWithLessThanTenPlayers()
+        public void TestCreateLineupOfWithLessThanElevenPlayers()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-1", validTeam));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-1", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -139,13 +139,13 @@ namespace TestClass
         }
 
         [TestMethod]
-        public void TestCreateLineupOfWithMoreThanTenPlayers()
+        public void TestCreateLineupOfWithMoreThanElevenPlayers()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-3", validTeam));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-3", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -157,7 +157,7 @@ namespace TestClass
         [TestMethod]
         public void TestCreateLineupOfWithANullTeam()
         {
-            Assert.Throws<ArgumentNullException>(() => new Lineup("4-4-2", null));
+            Assert.Throws<ArgumentNullException>(() => new Lineup("1-4-4-2", null));
         }
 
         [TestMethod]
@@ -167,7 +167,7 @@ namespace TestClass
             validTeam.Players = new List<Player>() { new Player("test test", new List<string>() { "G" }) };
             validTeam.SavePlayerToFile();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-2", validTeam));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-2", validTeam));
         }
     }
 }
