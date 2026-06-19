@@ -12,29 +12,29 @@ namespace TestClass
         public void TestCreateValidPlayer()
         {
             Player player = new Player(validName, validPositions);
-            List<string> listofFailures = new List<string>();
+            List<string> failures = new List<string>();
 
             if (!player.FieldPositions.Contains("ST"))
             {
-                listofFailures.Add("Missing 'ST' from FieldPositions.");
+                failures.Add("Missing 'ST' from FieldPositions.");
             }
             if (!player.FieldPositions.Contains("MC"))
             {
-                listofFailures.Add("Missing 'MC' from FieldPositions.");
+                failures.Add("Missing 'MC' from FieldPositions.");
             }
 
             if (player.FirstName != "Cristiano")
             {
-                listofFailures.Add($"Expected FirstName 'Cristiano', but got '{player.FirstName}'.");
+                failures.Add($"Expected FirstName 'Cristiano', but got '{player.FirstName}'.");
             }
             if (player.LastName != "Ronaldo")
             {
-                listofFailures.Add($"Expected LastName 'Ronaldo', but got '{player.LastName}'.");
+                failures.Add($"Expected LastName 'Ronaldo', but got '{player.LastName}'.");
             }
 
-            if (listofFailures.Count != 0)
+            if (failures.Count != 0)
             {
-                Assert.Fail("TestCreateValidPlayer failed with the following errors:\n" + string.Join("\n", listofFailures));
+                Assert.Fail("TestCreateValidPlayer failed with the following errors:\n" + string.Join("\n", failures));
             }
         }
 

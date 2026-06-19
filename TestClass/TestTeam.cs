@@ -111,7 +111,7 @@ namespace TestClass
                 writer.WriteLine($"{player.ToCsvFormat()}");
             }
 
-            team.SavePlayerToFile();
+            team.LoadPlayersFromFile();
 
             List<Player> expectedValue = new List<Player>();
             expectedValue.Add(player);

@@ -10,22 +10,22 @@
   <Class Name="ClassLibrary.Team">
     <Position X="5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAgAAAAAAAAFAAAAAQAAMAAAAIAAAAAAAQAAAA=</HashCode>
+      <HashCode>AAAAIAAgAAAAAAAAEAAAAAQAAJAgAAAACAAIAAAAAAA=</HashCode>
       <FileName>Team.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.LineUp">
-    <Position X="7" Y="0.75" Width="1.5" />
+  <Class Name="ClassLibrary.AllowedFieldPositions">
+    <Position X="8.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAKAA2AAAEAAAQAAQAAAAAAAABAAAAAkEAAAAIAAAAA=</HashCode>
-      <FileName>LineUp.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AllowedFieldPositions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassLibrary.AllowedFieldPositions">
-    <Position X="8.75" Y="0.75" Width="1.5" />
+  <Class Name="ClassLibrary.Lineup">
+    <Position X="6.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>AllowedFieldPositions.cs</FileName>
+      <HashCode>AAAAAwAAABgAAQAABAAAAAABgAAAAAAAEAAAAEQIAAA=</HashCode>
+      <FileName>LineUp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

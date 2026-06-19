@@ -6,9 +6,9 @@ using System.Text;
 namespace TestClass
 {
     [TestClass]
-    public class TestLineUp
+    public class TestLineup
     {
-        public List<Player> validListOfPlayer = new List<Player>()
+        public List<Player> validPlayers = new List<Player>()
         {
             // Goalkeepers (G)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "G" }),
@@ -28,11 +28,11 @@ namespace TestClass
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM", "DC" }), // Defensive Midfielder / Center Back
 
-            // Central & Side Midfielders (MC, ML, MR, MD)
+            // Central & Side Midfielders (MC, ML, MR, DM)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "MC" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "MC" }),
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "ML", "MR" }), // Wide Midfielder
-            new Player($"Player {Guid.NewGuid()}", new List<string>() { "MD" }),       
+            new Player($"Player {Guid.NewGuid()}", new List<string>() { "DM" }),       
 
             // Attacking Midfielders (AM)
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "AM" }),
@@ -47,41 +47,15 @@ namespace TestClass
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "ST" })
         };
 
+        #region TestLineupText
         [TestMethod]
-        public void TestCreateValidLineUp()
+        public void TestCreateEmptyLineup()
         {
-            Team validTeam = new Team($"test_{Guid.NewGuid}");
-            validTeam.Players = validListOfPlayer;
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            LineUp validLineup = new LineUp("4-4-2", validTeam);
-
-            /*
-                { null }
-                { null null null null }
-                { null null null null }
-                { null null }
-            */
-
-            Assert.AreEqual(4 ,validLineup.LineUpList.Count, "The lineUpList did not get the expected count.");
-            for (int r = 0; r < validLineup.LineUpList.Count; r++)
-            {
-                switch (r)
-                {
-                    case 0:
-                        Assert.AreEqual(1 ,validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 1:
-                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 2:
-                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 3:
-                        Assert.AreEqual(2, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                }
-            }
+            Assert.Throws<ArgumentNullException>(() => new Lineup("", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -90,45 +64,110 @@ namespace TestClass
         }
 
         [TestMethod]
-        public void TestCreateInvalidLineUp()
+        public void TestCreateNullLineup()
         {
-            Team validTeam = new Team($"test_{Guid.NewGuid}");
-            validTeam.Players = validListOfPlayer;
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
             validTeam.SavePlayerToFile();
 
-            LineUp validLineup = new LineUp("4-4-2", validTeam);
-
-            /*
-                { null }
-                { null null null null }
-                { null null null null }
-                { null null }
-            */
-
-            Assert.AreEqual(4, validLineup.LineUpList.Count, "The lineUpList did not get the expected count.");
-            for (int r = 0; r < validLineup.LineUpList.Count; r++)
-            {
-                switch (r)
-                {
-                    case 0:
-                        Assert.AreEqual(1, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 1:
-                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 2:
-                        Assert.AreEqual(4, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                    case 3:
-                        Assert.AreEqual(2, validLineup.LineUpList[r].Count, "The player list in the LineUpList did not get the expected count.");
-                        break;
-                }
-            }
+            Assert.Throws<ArgumentNullException>(() => new Lineup(null, validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
                 File.Delete(validTeam.TeamFilePath);
             }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfTwoRowsLineup()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("5-5", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfSixRowsLineup()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("2-2-2-2-1-1", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithInvalidChar()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("4-A-2", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithLessThanTenPlayers()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-1", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithMoreThanTenPlayers()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-3", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+        #endregion
+
+        [TestMethod]
+        public void TestCreateLineupOfWithANullTeam()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Lineup("4-4-2", null));
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithATeamPlayersOfLessThanEleven()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = new List<Player>() { new Player("test test", new List<string>() { "G" }) };
+            validTeam.SavePlayerToFile();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("4-4-2", validTeam));
         }
     }
 }

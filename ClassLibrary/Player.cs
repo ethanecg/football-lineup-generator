@@ -53,9 +53,9 @@ namespace ClassLibrary
                 foreach (string fp in value) // Check if the fp match a value in validFieldPositions.
                 {
                     bool valid = false;
-                    foreach (string vfp in AllowedFieldPositions.VALID_FIELD_POSITIONS)
+                    foreach (string vfp in AllowedFieldPositions.ALLOWED_FIELD_POSITIONS)
                     {
-                        if (fp != vfp)
+                        if (fp == vfp)
                         {
                             valid = true;
                         }
