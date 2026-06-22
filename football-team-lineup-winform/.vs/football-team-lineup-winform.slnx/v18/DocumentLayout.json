@@ -4,15 +4,6 @@
   "Documents": [
     {
       "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\lineup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6DF484F-2799-4BFB-88D8-392EFF105593}|..\\TestClass\\TestClass.csproj|c:\\project\\csharp\\football-lineup-generator\\testclass\\testlineup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\allowedfieldpositions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\classdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,55 +13,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TestLineup.cs",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\TestClass\\TestLineup.cs",
-              "RelativeDocumentMoniker": "..\\TestClass\\TestLineup.cs",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\TestClass\\TestLineup.cs",
-              "RelativeToolTip": "..\\TestClass\\TestLineup.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAIwJ8AAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-19T19:31:29.403Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AllowedFieldPositions.cs",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\AllowedFieldPositions.cs",
-              "RelativeDocumentMoniker": "..\\ClassLibrary\\AllowedFieldPositions.cs",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\AllowedFieldPositions.cs",
-              "RelativeToolTip": "..\\ClassLibrary\\AllowedFieldPositions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-19T17:10:32.457Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ClassDiagram.cd",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassDiagram.cd",
-              "RelativeDocumentMoniker": "..\\ClassLibrary\\ClassDiagram.cd",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassDiagram.cd",
-              "RelativeToolTip": "..\\ClassLibrary\\ClassDiagram.cd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2026-06-19T16:53:10.328Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LineUp.cs",
+              "Title": "Lineup.cs",
               "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Lineup.cs",
               "RelativeDocumentMoniker": "..\\ClassLibrary\\Lineup.cs",
               "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Lineup.cs",
               "RelativeToolTip": "..\\ClassLibrary\\Lineup.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAQwD8AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-18T15:25:47.93Z",
               "EditorCaption": ""

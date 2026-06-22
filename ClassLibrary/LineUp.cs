@@ -10,16 +10,19 @@ namespace ClassLibrary
 {
     public class Lineup
     {
-        private string _formation; // e.x, 4-4-2
+        private string _formation; // e.x, 1-4-4-2
         private List<List<Player>> _pitchPlayers; // The grid of players on the pitch (can contain null).
         private List<List<string>> _pitchPositions; // the grid of positions for the lineup (can contain null).
         private Team _team;
-        private string _option; // Basically if you have a lineup of 4 rows the special roles (AM & DM) it's to know wich one will have.
+        private string _option; // Basically if you have a lineup of 5 rows the special roles (AM & DM) it's to know wich one will have.
 
         /// <param name="value"> A football lineup written with '-' in between player count and inculding the goaler e.x, 1-4-4-2.</param>
-        /// <exception cref="ArgumentNullException">Thrown if the value is null or empty.</exception>
-        /// <exception cref="FormatException">Thrown if a number in the value failed to convert into an int. Also thrown if the value have less than 3 row or more than 5.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if the lineup text don't have 10 players.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the value is null or empty.</exception>
+        /// <exception cref="FormatException">Thrown when a number in the value failed to convert into an int.</exception>
+        /// <exception cref="FormatException">Thrown when the value have less than 3 rows or more than 5.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the lineup text don't have 11 players.</exception>
+        /// <exception cref="FormatException">Thrown when there is more than 1 goaler.</exception>
+        /// <exception cref="FormatException">Thrown when there is a value of 0 in the formation.</exception>
         public string Formation
         {
             get { return _formation; }
@@ -33,7 +36,11 @@ namespace ClassLibrary
                 string[] lineUpStringArray = value.Split('-');
                 if (lineUpStringArray.Length > 6 || lineUpStringArray.Length < 4)
                 {
-                    throw new FormatException($"The formation cannnot (not counting gk) have less than 3 lane and cannot have more than 5.");
+                    throw new FormatException($"The formation cannnot have less than 4 lane nor cannot have more than 6.");
+                }
+                if (int.Parse(lineUpStringArray[0]) != 1)
+                {
+                    throw new FormatException($"You cannot have more than one goaler in the lineup.");
                 }
                 List<int> lineUpIntList = new List<int>();
                 int totalNumberOfPlayer = 0;
@@ -42,6 +49,10 @@ namespace ClassLibrary
                     if (int.TryParse(v, out int r) == false)
                     {
                         throw new FormatException($"Fail to convert the value {v} into an int.");
+                    }
+                    else if (r == 0)
+                    {
+                        throw new FormatException($"You cannot have a value of 0 in your formation.");
                     }
                     else
                     {
@@ -57,7 +68,7 @@ namespace ClassLibrary
             }
         }
 
-        /// <exception cref="FormatException">Thrown if the number of players is not 11.</exception>
+        /// <exception cref="FormatException">Thrown when the number of players is not 11.</exception>
         public List<List<Player>> PitchPlayers
         {
             get { return _pitchPlayers; }
@@ -80,7 +91,7 @@ namespace ClassLibrary
             }
         }
 
-        /// <exception cref="FormatException">Thrown if the number of positions is not 11.</exception>
+        /// <exception cref="FormatException">Thrown when the number of positions is not 11.</exception>
         public List<List<string>> PitchPositions
         {
             get { return _pitchPositions; }
@@ -103,7 +114,7 @@ namespace ClassLibrary
             }
         }
 
-        /// <exception cref="ArgumentNullException">Thrown if the the team is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the team is null.</exception>
         public Team Team
         {
             get { return _team; }
@@ -122,9 +133,8 @@ namespace ClassLibrary
         }
 
         /// <summary>Check if the option is correct, between the 2 options : "AM" and "DM". If it's not needed it set it to "". This will be useful for FillPitchPositions().</summary>
-        /// <exception cref="ArgumentNullException">Thrown if formation is null or empty.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the value is null.</exception>
-        /// <exception cref="FormatException">Thrown if the value is not "AM" or "DM".</exception>
+        /// <exception cref="ArgumentNullException">Thrown when formation is null or empty.</exception>
+        /// <exception cref="FormatException">Thrown when the value is not "AM" or "DM".</exception>
         public string Option
         {
             get { return _option; }
@@ -153,8 +163,15 @@ namespace ClassLibrary
             }
         }
 
-        /// <summary>Initialize the object and fill PitchPlayer with null.</summary>
+        /// <summary>Initialize the object and fill LineupSlots with null.</summary>
         /// <param name="formation">e.x, 4-4-2 (goaler must not be inculded.)</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="formation"/> is null or empty.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="formation"/> failed to convert into an int.</exception>
+        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 3 rows or more than 5.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="formation"/> don't have 11 players.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="formation"/> have more than 1 goaler.</exception>
+        /// <exception cref="FormatException">Thrown when there is a value of 0 in the <paramref name="formation"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="team"/> is null.</exception>
         public Lineup(string formation, Team team)
         {
             Formation = formation;
@@ -182,25 +199,41 @@ namespace ClassLibrary
         /// <summary>Initialize the object and fill LineupSlots with null.</summary>
         /// <param name="formation">e.x, 4-4-2 (goaler must not be inculded.)</param>
         /// <param name="option">Only use if formation have 4 rows. Choose between "AM" or "DC"</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="formation"/> is null or empty.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="formation"/> failed to convert into an int.</exception>
+        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 3 rows or more than 5.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="formation"/> don't have 11 players.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="formation"/> have more than 1 goaler.</exception>
+        /// <exception cref="FormatException">Thrown when there is a value of 0 in the <paramref name="formation"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="team"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="option"/> is null or empty.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="option"/> is not "AM" or "DM".</exception>
         public Lineup(string formation, Team team, string option)
         {
             Formation = formation;
 
-            List<List<Player>> initialLineupSlots = new List<List<Player>>();
+            List<List<Player>> initialPitchPlayers = new List<List<Player>>();
+            List<List<string>> initialPitchPositions = new List<List<string>>();
             for (int r = 0; r < Formation.Split('-').Count(); r++)
             {
-                List<Player> listOfPlayers = new List<Player>();
+                List<Player> Players = new List<Player>();
+                List<string> Positions = new List<string>();
                 for (int c = 0; c < int.Parse(Formation.Split("-")[r]); c++)
                 {
-                    listOfPlayers.Add(null);
+                    Players.Add(null);
+                    Positions.Add(null);
                 }
-                initialLineupSlots.Add(listOfPlayers);
+                initialPitchPlayers.Add(Players);
+                initialPitchPositions.Add(Positions);
             }
-            PitchPlayers = initialLineupSlots;
+            PitchPlayers = initialPitchPlayers;
+            PitchPositions = initialPitchPositions;
             Option = option;
             Team = team;
         }
 
+        /// <summary>Fill the positions based on set of rules.</summary>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when PitchPositions don't have 11 players.</exception>
         public void FillPitchPositions()
         {
             int count = 0;
@@ -327,6 +360,9 @@ namespace ClassLibrary
             }
         }
 
+        /// <summary>Fill players based on priority system (Exact position -> similar positions -> any positions).</summary>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when PitchPlayers don't have the same count as PitchPositions.</exception>
+        /// <exception cref="ArgumentException">Thrown when PitchPlayers don't have the same number of columns as PitchPositions.</exception>
         public void FillPitchPlayersWithRandomPlayers()
         {
             if (PitchPlayers.Count != PitchPositions.Count)
@@ -394,8 +430,6 @@ namespace ClassLibrary
         }
 
         /// <summary>(used with PlayerBasedOnPosition) Return true if the player is already in the lineUp and else return false.</summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
         public bool IsPlayerAlreadyInPitchPlayers(Player player)
         {
             for (int r = 0; r < PitchPlayers.Count(); r++)
@@ -412,7 +446,6 @@ namespace ClassLibrary
         }
 
         /// <summary>Search for same position and return Players. If none are found, find with similar position then find with anyone.</summary>
-        /// <param name="players">All the wanted positions.</param>
         public List<Player> PlayersBasedOnPosition(string position)
         {
             bool isValid = false;
