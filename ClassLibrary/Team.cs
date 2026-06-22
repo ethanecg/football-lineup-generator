@@ -71,7 +71,7 @@ namespace ClassLibrary
         }
 
         /// <summary>Write all players contain in 'Players' in the team file.</summary>
-        public void SavePlayerToFile()
+        public void SavePlayersToFile()
         {
             using (StreamWriter writer = new StreamWriter(TeamFilePath))
             {

@@ -47,13 +47,14 @@ namespace TestClass
             new Player($"Player {Guid.NewGuid()}", new List<string>() { "ST" })
         };
 
-        #region TestLineupText
+        #region TestFormation
+
         [TestMethod]
         public void TestCreateEmptyLineup()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<ArgumentNullException>(() => new Lineup("", validTeam));
 
@@ -68,9 +69,24 @@ namespace TestClass
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<ArgumentNullException>(() => new Lineup(null, validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithInvalidChar()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayersToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("1-4-A-2", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -83,7 +99,7 @@ namespace TestClass
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<FormatException>(() => new Lineup("1-5-5", validTeam));
 
@@ -98,24 +114,9 @@ namespace TestClass
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<FormatException>(() => new Lineup("1-2-2-2-2-1-1", validTeam));
-
-            if (File.Exists(validTeam.TeamFilePath))
-            {
-                File.Delete(validTeam.TeamFilePath);
-            }
-        }
-
-        [TestMethod]
-        public void TestCreateLineupOfWithInvalidChar()
-        {
-            Team validTeam = new Team($"test_{Guid.NewGuid()}");
-            validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
-
-            Assert.Throws<FormatException>(() => new Lineup("1-4-A-2", validTeam));
 
             if (File.Exists(validTeam.TeamFilePath))
             {
@@ -128,7 +129,7 @@ namespace TestClass
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-1", validTeam));
 
@@ -143,7 +144,7 @@ namespace TestClass
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
             validTeam.Players = validPlayers;
-            validTeam.SavePlayerToFile();
+            validTeam.SavePlayersToFile();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-3", validTeam));
 
@@ -152,22 +153,76 @@ namespace TestClass
                 File.Delete(validTeam.TeamFilePath);
             }
         }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithTwoGoalers()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayersToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("2-4-4-1", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithAValueOf0InTheFormation()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayersToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("1-4-4-0-2", validTeam));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
         #endregion
 
+        #region TestTeam
         [TestMethod]
         public void TestCreateLineupOfWithANullTeam()
         {
             Assert.Throws<ArgumentNullException>(() => new Lineup("1-4-4-2", null));
         }
+        #endregion
 
+        #region TestOption
         [TestMethod]
-        public void TestCreateLineupOfWithATeamPlayersOfLessThanEleven()
+        public void TestCreateLineupOfWithANullOption()
         {
             Team validTeam = new Team($"test_{Guid.NewGuid()}");
-            validTeam.Players = new List<Player>() { new Player("test test", new List<string>() { "G" }) };
-            validTeam.SavePlayerToFile();
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayersToFile();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-2", validTeam));
+            Assert.Throws<ArgumentNullException>(() => new Lineup("1-4-4-1-1", validTeam, null));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
         }
+
+        [TestMethod]
+        public void TestCreateLineupOfWithAnInvalidOption()
+        {
+            Team validTeam = new Team($"test_{Guid.NewGuid()}");
+            validTeam.Players = validPlayers;
+            validTeam.SavePlayersToFile();
+
+            Assert.Throws<FormatException>(() => new Lineup("1-4-4-1-1", validTeam, "CM"));
+
+            if (File.Exists(validTeam.TeamFilePath))
+            {
+                File.Delete(validTeam.TeamFilePath);
+            }
+        }
+        #endregion
     }
 }

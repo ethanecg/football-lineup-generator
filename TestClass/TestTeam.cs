@@ -79,7 +79,7 @@ namespace TestClass
 
             team.Players.Add(new Player(validPlayerName, validPositions));
 
-            team.SavePlayerToFile();
+            team.SavePlayersToFile();
 
             using (StreamReader reader = new StreamReader(team.TeamFilePath))
             {

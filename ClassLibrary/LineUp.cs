@@ -133,7 +133,7 @@ namespace ClassLibrary
         }
 
         /// <summary>Check if the option is correct, between the 2 options : "AM" and "DM". If it's not needed it set it to "". This will be useful for FillPitchPositions().</summary>
-        /// <exception cref="ArgumentNullException">Thrown when formation is null or empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when formation is null.</exception>
         /// <exception cref="FormatException">Thrown when the value is not "AM" or "DM".</exception>
         public string Option
         {
@@ -167,7 +167,7 @@ namespace ClassLibrary
         /// <param name="formation">e.x, 4-4-2 (goaler must not be inculded.)</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="formation"/> is null or empty.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="formation"/> failed to convert into an int.</exception>
-        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 3 rows or more than 5.</exception>
+        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 4 rows or more than 6.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="formation"/> don't have 11 players.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="formation"/> have more than 1 goaler.</exception>
         /// <exception cref="FormatException">Thrown when there is a value of 0 in the <paramref name="formation"/>.</exception>
@@ -201,12 +201,12 @@ namespace ClassLibrary
         /// <param name="option">Only use if formation have 4 rows. Choose between "AM" or "DC"</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="formation"/> is null or empty.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="formation"/> failed to convert into an int.</exception>
-        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 3 rows or more than 5.</exception>
+        /// <exception cref="FormatException">Thrown when the <paramref name="formation"/> have less than 4 rows or more than 6.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="formation"/> don't have 11 players.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="formation"/> have more than 1 goaler.</exception>
         /// <exception cref="FormatException">Thrown when there is a value of 0 in the <paramref name="formation"/>.</exception>
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="team"/> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="option"/> is null or empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="option"/> is null.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="option"/> is not "AM" or "DM".</exception>
         public Lineup(string formation, Team team, string option)
         {
