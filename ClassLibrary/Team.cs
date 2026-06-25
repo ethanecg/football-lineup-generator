@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.ComponentModel.Design;
 
 namespace ClassLibrary
 {
@@ -25,7 +26,7 @@ namespace ClassLibrary
             }
         }
 
-        /// <summary>Set file location using the name of the team e.x, {name.csv}. If the file don't exist, create it.</summary>
+        /// <summary>Set file location using the name of the team e.x, {name.csv}. If the file don't exist, create it. Also Create the Directory if it don't exist.</summary>
         /// <param name="value">The name of the team.</param>
         /// <exception cref="ArgumentNullException">Thrown when the value is null or empty.</exception>
         public string TeamFilePath
@@ -40,11 +41,17 @@ namespace ClassLibrary
 
                 value = value.Trim(); // Avoid having name written with multiple spaces at the start and at the end.
 
-                if (!File.Exists($"..\\..\\..\\..\\Teams\\{value}.csv"))
+                if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams")))
                 {
-                    using (File.Create($"..\\..\\..\\..\\Teams\\{value}.csv")) { }
+                    Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams"));
                 }
-                _teamFilePath = $"..\\..\\..\\..\\Teams\\{value}.csv";
+
+                if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv")))
+                {
+                    using (File.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv"))) { }
+                }
+
+                _teamFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv");
             }
         }
 
