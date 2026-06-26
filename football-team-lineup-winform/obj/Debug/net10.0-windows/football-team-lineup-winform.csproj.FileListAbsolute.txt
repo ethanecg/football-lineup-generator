@@ -255,3 +255,4 @@ C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Deb
 C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.pdb
 C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football-team-lineup-winform.genruntimeconfig.cache
 C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\ref\football-team-lineup-winform.dll
+C:\Project\Csharp\football-lineup-generator\football-team-lineup-winform\obj\Debug\net10.0-windows\football_team_lineup_winform.TeamForm.resources

@@ -1026,6 +1026,19 @@
             "related": ".xml"
           }
         }
+      },
+      "ClassLibrary/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "MSTest": "4.2.3"
+        },
+        "compile": {
+          "bin/placeholder/ClassLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ClassLibrary.dll": {}
+        }
       }
     }
   },
@@ -2161,10 +2174,16 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "ClassLibrary/1.0.0": {
+      "type": "project",
+      "path": "../ClassLibrary/ClassLibrary.csproj",
+      "msbuildProject": "../ClassLibrary/ClassLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0-windows": [
+      "ClassLibrary >= 1.0.0",
       "MSTest >= 4.2.3"
     ]
   },
@@ -2200,7 +2219,11 @@
         "net10.0-windows": {
           "framework": "net10.0-windows7.0",
           "targetAlias": "net10.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassLibrary.csproj": {
+              "projectPath": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\ClassLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
