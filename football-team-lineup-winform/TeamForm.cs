@@ -43,16 +43,43 @@ namespace football_team_lineup_winform
                     "You did not select anything.",
                     "Error",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
+                    MessageBoxIcon.Error
                 );
             }
             else
             {
-                string teamName = lstTeam.SelectedItems.ToString();
+                string teamName = lstTeam.SelectedItem.ToString();
 
-                SelectedTeam = new Team(teamName);
+                try
+                {
+                    SelectedTeam = new Team(teamName);
+                    this.DialogResult = DialogResult.OK;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+            }
+        }
 
-                this.DialogResult = DialogResult.OK;
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            using (CreateForm createForm = new CreateForm())
+            {
+                if (createForm.ShowDialog() == DialogResult.OK)
+                {
+                    // todo
+                }
             }
         }
     }

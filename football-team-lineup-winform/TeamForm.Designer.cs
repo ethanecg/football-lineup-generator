@@ -31,7 +31,7 @@
             lstTeam = new ListBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             btnSelect = new Button();
-            btnNew = new Button();
+            btnCreate = new Button();
             btnCancel = new Button();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -53,7 +53,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Controls.Add(btnSelect, 0, 0);
-            tableLayoutPanel1.Controls.Add(btnNew, 1, 0);
+            tableLayoutPanel1.Controls.Add(btnCreate, 1, 0);
             tableLayoutPanel1.Controls.Add(btnCancel, 2, 0);
             tableLayoutPanel1.Location = new Point(12, 312);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -73,15 +73,16 @@
             btnSelect.UseVisualStyleBackColor = true;
             btnSelect.Click += btnSelect_Click;
             // 
-            // btnNew
+            // btnCreate
             // 
-            btnNew.Dock = DockStyle.Fill;
-            btnNew.Location = new Point(123, 3);
-            btnNew.Name = "btnNew";
-            btnNew.Size = new Size(114, 31);
-            btnNew.TabIndex = 1;
-            btnNew.Text = "New";
-            btnNew.UseVisualStyleBackColor = true;
+            btnCreate.Dock = DockStyle.Fill;
+            btnCreate.Location = new Point(123, 3);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(114, 31);
+            btnCreate.TabIndex = 1;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += btnCreate_Click;
             // 
             // btnCancel
             // 
@@ -92,6 +93,7 @@
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // TeamForm
             // 
@@ -111,7 +113,7 @@
         private ListBox lstTeam;
         private TableLayoutPanel tableLayoutPanel1;
         private Button btnSelect;
-        private Button btnNew;
+        private Button btnCreate;
         private Button btnCancel;
     }
 }
