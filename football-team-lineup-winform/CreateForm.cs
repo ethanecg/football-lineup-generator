@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Forms;
 
@@ -22,20 +23,22 @@ namespace football_team_lineup_winform
             // todo (there is a bug)
             try
             {
-                team = new Team(txtName.Text);
-                
+                Team teamName = (Team)FormatterServices.GetUninitializedObject(typeof(Team));
+                teamName.Name = txtName.Text;
+
                 // verify that team
                 foreach (string path in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams")))
                 {
                     string[] files = path.Split("\\");
-                    int indexOfFile = files.Length;
+                    int indexOfFile = files.Length - 1;
                     string file = files[indexOfFile].Replace(".csv", "");
-                    if (file == team.Name)
+                    if (file == teamName.Name)
                     {
-                        throw new ArgumentNullException(nameof(team.Name), "The team already exist cannot create another one.");
+                        throw new ArgumentNullException(nameof(teamName.Name), "The team already exist cannot create another one.");
                     }
                 }
 
+                team = new Team(txtName.Text);
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
@@ -47,6 +50,11 @@ namespace football_team_lineup_winform
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

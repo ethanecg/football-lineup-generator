@@ -22,7 +22,7 @@ namespace ClassLibrary
                 {
                     throw new ArgumentNullException(nameof(value), "The name of the team cannot be empty or null.");
                 }
-                _name = value.ToLower();
+                _name = value.ToLower().Trim();
             }
         }
 
@@ -39,14 +39,13 @@ namespace ClassLibrary
                     throw new ArgumentNullException(nameof(value), "The file of the player cannot be empty or null.");
                 }
 
-                value = value.Trim(); // Avoid having name written with multiple spaces at the start and at the end.
-
+                // In case the directroy Teams was remove.
                 if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams")))
                 {
                     Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams"));
                 }
 
-                if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv")))
+                if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv"))) // Exist even if the name is in capitals.
                 {
                     using (File.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv"))) { }
                 }
