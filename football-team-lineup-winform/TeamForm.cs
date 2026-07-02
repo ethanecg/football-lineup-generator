@@ -17,7 +17,11 @@ namespace football_team_lineup_winform
         public TeamForm()
         {
             InitializeComponent();
+            UpdateLstTeam();
+        }
 
+        private void UpdateLstTeam()
+        {
             lstTeam.Items.Clear();
             if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams")))
             {
@@ -78,7 +82,7 @@ namespace football_team_lineup_winform
             {
                 if (createForm.ShowDialog() == DialogResult.OK)
                 {
-                    // todo
+                    UpdateLstTeam();
                 }
             }
         }

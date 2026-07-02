@@ -1,4 +1,5 @@
 using ClassLibrary;
+using System.Security.Policy;
 
 namespace football_team_lineup_winform
 {
@@ -22,22 +23,21 @@ namespace football_team_lineup_winform
 
             cboOption.Items.Add("AM");
             cboOption.Items.Add("DM");
+            cboOption.SelectedIndex = 0;
 
             #endregion
-
-
         }
 
-        private void MakeEverythingAppear()
+        private void SetButtonsVisibility(bool visible)
         {
-            btnGenerate.Visible = true;
-            btnModify.Visible = true;
-            btnDelete.Visible = true;
+            btnGenerate.Visible = visible;
+            btnModify.Visible = visible;
+            btnDelete.Visible = visible;
 
-            txtFormationTitle.Visible = true;
-            txtFormation.Visible = true;
-            txtOptionTitle.Visible = true;
-            cboOption.Visible = true;
+            txtFormationTitle.Visible = visible;
+            txtFormation.Visible = visible;
+            txtOptionTitle.Visible = visible;
+            cboOption.Visible = visible;
         }
 
         private void btnTeam_Click(object sender, EventArgs e)
@@ -50,8 +50,26 @@ namespace football_team_lineup_winform
                     txtSelectedTeam.Text = $"selected team : {SelectedTeam.Name}";
                     txtSelectedTeam.ForeColor = Color.Green;
 
-                    MakeEverythingAppear();
+                    SetButtonsVisibility(true);
                 }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this team?",
+                "Warning",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+                );
+            if (result == DialogResult.Yes)
+            {
+                File.Delete(SelectedTeam.TeamFilePath);
+                SelectedTeam = null;
+                txtSelectedTeam.Text = $"no team selected";
+                txtSelectedTeam.ForeColor = Color.Red;
+                SetButtonsVisibility(false);
             }
         }
     }

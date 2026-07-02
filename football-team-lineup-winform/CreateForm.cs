@@ -20,7 +20,6 @@ namespace football_team_lineup_winform
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            // todo (there is a bug)
             try
             {
                 Team teamName = (Team)FormatterServices.GetUninitializedObject(typeof(Team));

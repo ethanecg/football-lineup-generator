@@ -118,6 +118,7 @@
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -163,11 +164,13 @@
             // 
             txtFormation.Location = new Point(79, 106);
             txtFormation.Name = "txtFormation";
+            txtFormation.PlaceholderText = "e.x, 1-4-4-2";
             txtFormation.Size = new Size(100, 23);
             txtFormation.TabIndex = 5;
             // 
             // cboOption
             // 
+            cboOption.DropDownStyle = ComboBoxStyle.DropDownList;
             cboOption.FormattingEnabled = true;
             cboOption.Location = new Point(230, 106);
             cboOption.Name = "cboOption";
