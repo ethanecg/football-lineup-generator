@@ -492,9 +492,9 @@ namespace ClassLibrary
                         }
                     }
                 }
-                else if (midfieldersPriority.Contains(position))
+                else if (forwardsPriority.Contains(position))
                 {
-                    foreach (string po in defendersPriority)
+                    foreach (string po in forwardsPriority)
                     {
                         foreach (Player player in Team.Players)
                         {
@@ -505,9 +505,9 @@ namespace ClassLibrary
                         }
                     }
                 }
-                else if (defendersPriority.Contains(position))
+                else if (midfieldersPriority.Contains(position))
                 {
-                    foreach (string po in defendersPriority)
+                    foreach (string po in midfieldersPriority)
                     {
                         foreach (Player player in Team.Players)
                         {
