@@ -69,9 +69,51 @@ namespace ClassLibrary
             }
         }
 
+        /// <param name="playerCsv">The fullname and the position of a player in a csv format.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the fullname is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the last name of the player is empty or null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the list of field positions is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if a field position is not allowed.</exception>
+        public Player(string playerCsv)
+        {
+            string[] player = playerCsv.Split(';');
+            string fullName = player[0];
+            string fieldPositions = player[1];
+
+            // Name
+            if (fullName == null)
+            {
+                throw new ArgumentNullException(nameof(fullName), "The full name cannot be null");
+            }
+            string[] nameArray = fullName.Split(" ");
+            FirstName = nameArray[0];
+            string lastName = "";
+                // In case the player have two last name.
+            for (int i = 1; i < nameArray.Count(); i++)
+            {
+                if (i == nameArray.Count() - 1)
+                {
+                    lastName += $"{nameArray[i]}";
+                }
+                else
+                {
+                    lastName += $"{nameArray[i]} ";
+                }
+            }
+            LastName = lastName;
+
+            // Field position
+            FieldPositions = fieldPositions.Split(',').ToList();
+        }
+
         /// <param name="fullName">The first name and last name of a player separated by a space.</param>
         /// <param name="fieldPositions">A list of allowed field positions.</param>
-        /// <exception cref="ArgumentNullException">Thrown if the full name is null.</exception>
+        /// <exception cref = "ArgumentNullException"> Thrown if the fullname is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the last name of the player is empty or null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the list of field positions is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if a field position is not allowed.</exception>
         public Player(string fullName, List<string> fieldPositions)
         {
             if (fullName == null)

@@ -72,5 +72,16 @@ namespace football_team_lineup_winform
                 SetButtonsVisibility(false);
             }
         }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            using (ModifyForm modifyForm = new ModifyForm(SelectedTeam))
+            {
+                if (modifyForm.ShowDialog() == DialogResult.OK)
+                {
+                    
+                }
+            }
+        }
     }
 }

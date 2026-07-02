@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             tlpMainLayout = new TableLayoutPanel();
-            txtNameTitle = new TextBox();
             txtName = new TextBox();
+            txtNameTitle = new TextBox();
             btnCreate = new Button();
             btnCancel = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -40,11 +40,12 @@
             // 
             // tlpMainLayout
             // 
+            tlpMainLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tlpMainLayout.ColumnCount = 2;
             tlpMainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             tlpMainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-            tlpMainLayout.Controls.Add(txtNameTitle, 0, 0);
             tlpMainLayout.Controls.Add(txtName, 1, 0);
+            tlpMainLayout.Controls.Add(txtNameTitle, 0, 0);
             tlpMainLayout.Location = new Point(12, 12);
             tlpMainLayout.Name = "tlpMainLayout";
             tlpMainLayout.RowCount = 1;
@@ -53,9 +54,17 @@
             tlpMainLayout.Size = new Size(310, 44);
             tlpMainLayout.TabIndex = 0;
             // 
+            // txtName
+            // 
+            txtName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtName.Location = new Point(96, 10);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(211, 23);
+            txtName.TabIndex = 1;
+            // 
             // txtNameTitle
             // 
-            txtNameTitle.Anchor = AnchorStyles.None;
+            txtNameTitle.Anchor = AnchorStyles.Right;
             txtNameTitle.BackColor = SystemColors.Menu;
             txtNameTitle.BorderStyle = BorderStyle.None;
             txtNameTitle.Location = new Point(3, 14);
@@ -64,14 +73,6 @@
             txtNameTitle.TabIndex = 0;
             txtNameTitle.Text = "Name :";
             txtNameTitle.TextAlign = HorizontalAlignment.Right;
-            // 
-            // txtName
-            // 
-            txtName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtName.Location = new Point(96, 10);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(211, 23);
-            txtName.TabIndex = 1;
             // 
             // btnCreate
             // 
@@ -97,6 +98,7 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));

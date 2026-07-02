@@ -40,12 +40,14 @@
             txtFormation = new TextBox();
             cboOption = new ComboBox();
             txtOptionTitle = new TextBox();
+            tlpSecondaryLayout = new TableLayoutPanel();
             tlpMainLayout.SuspendLayout();
+            tlpSecondaryLayout.SuspendLayout();
             SuspendLayout();
             // 
             // txtTitle
             // 
-            txtTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtTitle.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtTitle.BorderStyle = BorderStyle.FixedSingle;
             txtTitle.Font = new Font("Arial Rounded MT Bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -108,6 +110,7 @@
             btnModify.TabIndex = 2;
             btnModify.Text = "Modify";
             btnModify.UseVisualStyleBackColor = true;
+            btnModify.Click += btnModify_Click;
             // 
             // btnDelete
             // 
@@ -135,25 +138,26 @@
             // 
             // txtSelectedTeam
             // 
-            txtSelectedTeam.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            txtSelectedTeam.Anchor = AnchorStyles.Right;
             txtSelectedTeam.BackColor = SystemColors.Menu;
             txtSelectedTeam.BorderStyle = BorderStyle.None;
             txtSelectedTeam.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSelectedTeam.ForeColor = Color.Red;
-            txtSelectedTeam.Location = new Point(395, 103);
+            txtSelectedTeam.Location = new Point(573, 8);
             txtSelectedTeam.Name = "txtSelectedTeam";
             txtSelectedTeam.ReadOnly = true;
-            txtSelectedTeam.Size = new Size(374, 15);
+            txtSelectedTeam.Size = new Size(184, 15);
             txtSelectedTeam.TabIndex = 3;
             txtSelectedTeam.Text = "no team selected";
             txtSelectedTeam.TextAlign = HorizontalAlignment.Right;
             // 
             // txtFormationTitle
             // 
+            txtFormationTitle.Anchor = AnchorStyles.Right;
             txtFormationTitle.BackColor = SystemColors.Menu;
             txtFormationTitle.BorderStyle = BorderStyle.None;
             txtFormationTitle.ForeColor = SystemColors.WindowText;
-            txtFormationTitle.Location = new Point(15, 109);
+            txtFormationTitle.Location = new Point(15, 7);
             txtFormationTitle.Name = "txtFormationTitle";
             txtFormationTitle.ReadOnly = true;
             txtFormationTitle.Size = new Size(58, 16);
@@ -162,48 +166,71 @@
             // 
             // txtFormation
             // 
-            txtFormation.Location = new Point(79, 106);
+            txtFormation.Dock = DockStyle.Fill;
+            txtFormation.Location = new Point(79, 3);
             txtFormation.Name = "txtFormation";
             txtFormation.PlaceholderText = "e.x, 1-4-4-2";
-            txtFormation.Size = new Size(100, 23);
+            txtFormation.Size = new Size(108, 23);
             txtFormation.TabIndex = 5;
             // 
             // cboOption
             // 
+            cboOption.Dock = DockStyle.Fill;
             cboOption.DropDownStyle = ComboBoxStyle.DropDownList;
             cboOption.FormattingEnabled = true;
-            cboOption.Location = new Point(230, 106);
+            cboOption.Location = new Point(269, 3);
             cboOption.Name = "cboOption";
-            cboOption.Size = new Size(121, 23);
+            cboOption.Size = new Size(70, 23);
             cboOption.TabIndex = 6;
             // 
             // txtOptionTitle
             // 
+            txtOptionTitle.Anchor = AnchorStyles.Right;
             txtOptionTitle.BackColor = SystemColors.Menu;
             txtOptionTitle.BorderStyle = BorderStyle.None;
-            txtOptionTitle.Location = new Point(185, 109);
+            txtOptionTitle.Location = new Point(224, 7);
             txtOptionTitle.Name = "txtOptionTitle";
             txtOptionTitle.ReadOnly = true;
             txtOptionTitle.Size = new Size(39, 16);
             txtOptionTitle.TabIndex = 7;
             txtOptionTitle.Text = "Option";
             // 
+            // tlpSecondaryLayout
+            // 
+            tlpSecondaryLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tlpSecondaryLayout.ColumnCount = 6;
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpSecondaryLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tlpSecondaryLayout.Controls.Add(txtFormationTitle, 0, 0);
+            tlpSecondaryLayout.Controls.Add(txtOptionTitle, 2, 0);
+            tlpSecondaryLayout.Controls.Add(txtFormation, 1, 0);
+            tlpSecondaryLayout.Controls.Add(txtSelectedTeam, 5, 0);
+            tlpSecondaryLayout.Controls.Add(cboOption, 3, 0);
+            tlpSecondaryLayout.Location = new Point(12, 103);
+            tlpSecondaryLayout.Name = "tlpSecondaryLayout";
+            tlpSecondaryLayout.RowCount = 1;
+            tlpSecondaryLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpSecondaryLayout.Size = new Size(760, 31);
+            tlpSecondaryLayout.TabIndex = 8;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 461);
-            Controls.Add(txtOptionTitle);
-            Controls.Add(cboOption);
-            Controls.Add(txtFormation);
-            Controls.Add(txtFormationTitle);
-            Controls.Add(txtSelectedTeam);
+            Controls.Add(tlpSecondaryLayout);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(tlpMainLayout);
             Controls.Add(txtTitle);
             Name = "MainForm";
-            Text = "Form1";
+            Text = "MainForm";
             tlpMainLayout.ResumeLayout(false);
+            tlpSecondaryLayout.ResumeLayout(false);
+            tlpSecondaryLayout.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -222,5 +249,6 @@
         private TextBox txtFormation;
         private ComboBox cboOption;
         private TextBox txtOptionTitle;
+        private TableLayoutPanel tlpSecondaryLayout;
     }
 }
