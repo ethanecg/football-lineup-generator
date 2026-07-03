@@ -34,13 +34,13 @@
             btnGenerate = new Button();
             btnModify = new Button();
             btnDelete = new Button();
-            tableLayoutPanel2 = new TableLayoutPanel();
             txtSelectedTeam = new TextBox();
             txtFormationTitle = new TextBox();
             txtFormation = new TextBox();
             cboOption = new ComboBox();
             txtOptionTitle = new TextBox();
             tlpSecondaryLayout = new TableLayoutPanel();
+            tlpFormation = new TableLayoutPanel();
             tlpMainLayout.SuspendLayout();
             tlpSecondaryLayout.SuspendLayout();
             SuspendLayout();
@@ -100,6 +100,7 @@
             btnGenerate.TabIndex = 1;
             btnGenerate.Text = "Generate";
             btnGenerate.UseVisualStyleBackColor = true;
+            btnGenerate.Click += btnGenerate_Click;
             // 
             // btnModify
             // 
@@ -122,19 +123,6 @@
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Location = new Point(732, 429);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 2;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(8, 8);
-            tableLayoutPanel2.TabIndex = 2;
             // 
             // txtSelectedTeam
             // 
@@ -217,13 +205,27 @@
             tlpSecondaryLayout.Size = new Size(760, 31);
             tlpSecondaryLayout.TabIndex = 8;
             // 
+            // tlpFormation
+            // 
+            tlpFormation.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            tlpFormation.ColumnCount = 1;
+            tlpFormation.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpFormation.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpFormation.Location = new Point(12, 140);
+            tlpFormation.Name = "tlpFormation";
+            tlpFormation.RowCount = 1;
+            tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpFormation.Size = new Size(760, 309);
+            tlpFormation.TabIndex = 9;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 461);
+            Controls.Add(tlpFormation);
             Controls.Add(tlpSecondaryLayout);
-            Controls.Add(tableLayoutPanel2);
             Controls.Add(tlpMainLayout);
             Controls.Add(txtTitle);
             Name = "MainForm";
@@ -239,7 +241,6 @@
 
         private TextBox txtTitle;
         private TableLayoutPanel tlpMainLayout;
-        private TableLayoutPanel tableLayoutPanel2;
         private Button btnTeam;
         private Button btnGenerate;
         private Button btnModify;
@@ -250,5 +251,6 @@
         private ComboBox cboOption;
         private TextBox txtOptionTitle;
         private TableLayoutPanel tlpSecondaryLayout;
+        private TableLayoutPanel tlpFormation;
     }
 }

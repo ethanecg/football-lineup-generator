@@ -62,7 +62,7 @@ namespace ClassLibrary
                 }
                 if (totalNumberOfPlayer != 11)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), "The string of the lineup must contain a total of 10 players.");
+                    throw new ArgumentOutOfRangeException(nameof(value), "The string of the lineup must contain a total of 11 players.");
                 }
                 _formation = value;
             }

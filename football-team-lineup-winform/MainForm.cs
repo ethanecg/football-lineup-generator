@@ -6,6 +6,7 @@ namespace football_team_lineup_winform
     public partial class MainForm : Form
     {
         Team SelectedTeam { get; set; }
+        Lineup SelectedLineup { get; set; }
 
         public MainForm()
         {
@@ -79,8 +80,60 @@ namespace football_team_lineup_winform
             {
                 if (modifyForm.ShowDialog() == DialogResult.OK)
                 {
-                    
+                    // Do nothing.
                 }
+            }
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            bool valid = false;
+            try
+            {
+                Lineup lineup = new Lineup(txtFormation.Text, SelectedTeam, cboOption.SelectedText);
+                SelectedLineup = lineup;
+                valid = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Formation error : {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
+            if (valid)
+            {
+                // Add tlpFormation rows and format it well.
+                int rowNumber = SelectedLineup.PitchPositions.Count();
+                tlpFormation.RowCount = rowNumber;
+                tlpFormation.RowStyles.Clear();
+
+                float rowSize = 100f / tlpFormation.RowCount;
+                for (int i = 0; i < tlpFormation.RowCount; i++)
+                {
+                    tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, rowSize));
+                }
+
+                // Generate player
+                SelectedLineup.FillPitchPlayersWithRandomPlayers();
+
+                // Add players to the new table layout.
+                int rowIndex = -1;
+                foreach (List<Player> players in SelectedLineup.PitchPlayers)
+                {
+                    rowIndex++;
+                    TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+                 
+                    foreach (Player player in players)
+                    {
+
+                    }
+
+                    tlpFormation.Controls.Add(new TableLayoutPanel());
+                }
+
             }
         }
     }
