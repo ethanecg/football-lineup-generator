@@ -11,6 +11,7 @@ namespace football_team_lineup_winform
         public MainForm()
         {
             InitializeComponent();
+
             #region idk what name
 
             btnGenerate.Visible = false;
@@ -116,24 +117,28 @@ namespace football_team_lineup_winform
                     tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, rowSize));
                 }
 
-                // Generate player
+                // Generate Fill PitchPosition and PitchPlayer.
+                SelectedLineup.FillPitchPositions();
                 SelectedLineup.FillPitchPlayersWithRandomPlayers();
 
+                /*
                 // Add players to the new table layout.
-                int rowIndex = -1;
+                int rowIndex = tlpFormation.RowCount;
                 foreach (List<Player> players in SelectedLineup.PitchPlayers)
                 {
-                    rowIndex++;
+                    rowIndex--;
+                    
                     TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+                    tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
                  
                     foreach (Player player in players)
                     {
-
+                        
                     }
 
-                    tlpFormation.Controls.Add(new TableLayoutPanel());
+                    tlpFormation.Controls.Add(tableLayoutPanel, 1, rowIndex);
                 }
-
+                */
             }
         }
     }

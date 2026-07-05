@@ -196,7 +196,7 @@ namespace ClassLibrary
             Team = team;
         }
 
-        /// <summary>Initialize the object and fill LineupSlots with null.</summary>
+        /// <summary>Initialize the object, fill PitchPlayers and fill PitchPositions with null values.</summary>
         /// <param name="formation">e.x, 4-4-2 (goaler must not be inculded.)</param>
         /// <param name="option">Only use if formation have 4 rows. Choose between "AM" or "DC"</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="formation"/> is null or empty.</exception>
@@ -395,7 +395,7 @@ namespace ClassLibrary
             // LineupSlotsPlayers and LineupSlotsPositions are 100% the same format.
             for (int r = 0; r < PitchPlayers.Count; r++)
             {
-                for (int c = 0; c < PitchPlayers.Count; c++)
+                for (int c = 0; c < PitchPlayers[r].Count; c++)
                 {
                     PitchPlayers[r][c] = RandomPlayer(PlayersBasedOnPosition(PitchPositions[r][c]));
                 }
@@ -410,6 +410,7 @@ namespace ClassLibrary
             {
                 while (!reader.EndOfStream)
                 {
+                    reader.ReadLine();
                     count++;
                 }
                 if (count < 11)
@@ -421,7 +422,7 @@ namespace ClassLibrary
         }
 
         /// <summary>(used with the list provided by PlayersBasedOnPosition) Return a random player in a list of player.</summary>
-        /// <param name="playerList">A list of player based on their position. Use with the method ReturnListOfPlayerBasedOnPosition.</param>
+        /// <param name="playerList">A list of player based on their position. Use with the method PlayersBasedOnPosition.</param>
         public Player RandomPlayer(List<Player> playerList)
         {
             Random random = new Random();
@@ -429,7 +430,7 @@ namespace ClassLibrary
             return playerList[randomindex];
         }
 
-        /// <summary>(used with PlayerBasedOnPosition) Return true if the player is already in the lineUp and else return false.</summary>
+        /// <summary>(used with PlayersBasedOnPosition) Return true if the player is already in the lineUp and else return false.</summary>
         public bool IsPlayerAlreadyInPitchPlayers(Player player)
         {
             for (int r = 0; r < PitchPlayers.Count(); r++)
@@ -449,13 +450,11 @@ namespace ClassLibrary
         public List<Player> PlayersBasedOnPosition(string position)
         {
             bool isValid = false;
-            foreach (string allowedP in AllowedFieldPositions.ALLOWED_FIELD_POSITIONS)
+            if (AllowedFieldPositions.ALLOWED_FIELD_POSITIONS.Contains(position))
             {
-                if (allowedP.Contains(position))
-                {
-                    isValid = true;
-                }
+                isValid = true;
             }
+
             if (isValid == false)
             {
                 throw new FormatException("The positon is not valid.");
