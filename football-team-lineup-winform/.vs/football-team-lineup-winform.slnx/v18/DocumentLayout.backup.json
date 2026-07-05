@@ -3,14 +3,11 @@
   "WorkspaceRootPath": "C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7B41EC7C-B5EB-45AA-A7D0-0AB43B581B47}|..\\ClassLibrary\\ClassLibrary.csproj|c:\\project\\csharp\\football-lineup-generator\\classlibrary\\lineup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{78BFEF61-103D-6A41-BB6F-24A14DC3B4BB}|football-team-lineup-winform.csproj|c:\\project\\csharp\\football-lineup-generator\\football-team-lineup-winform\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{78BFEF61-103D-6A41-BB6F-24A14DC3B4BB}|football-team-lineup-winform.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{78BFEF61-103D-6A41-BB6F-24A14DC3B4BB}|football-team-lineup-winform.csproj|C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{78BFEF61-103D-6A41-BB6F-24A14DC3B4BB}|football-team-lineup-winform.csproj|c:\\project\\csharp\\football-lineup-generator\\football-team-lineup-winform\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{78BFEF61-103D-6A41-BB6F-24A14DC3B4BB}|football-team-lineup-winform.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -26,32 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Lineup.cs",
-              "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Lineup.cs",
-              "RelativeDocumentMoniker": "..\\ClassLibrary\\Lineup.cs",
-              "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\ClassLibrary\\Lineup.cs",
-              "RelativeToolTip": "..\\ClassLibrary\\Lineup.cs",
-              "ViewState": "AgIAAHoBAAAAAAAAAAAAAI4BAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T15:56:26.089Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAAwHgAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAF8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-03T14:42:17.341Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\Project\\Csharp\\football-lineup-generator\\football-team-lineup-winform\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",

@@ -284,9 +284,9 @@ namespace ClassLibrary
             currentRow++; //
 
             // Defensive midfielders (optional)
-            if (Option == "DM" || PitchPositions.Count == 5)
+            if (Option == "DM" || PitchPositions.Count == 6)
             {
-                for (int c = 0; c < PitchPositions[1].Count; c++)
+                for (int c = 0; c < PitchPositions[currentRow].Count; c++)
                 {
                     PitchPositions[currentRow][c] = "DM";
                 }
@@ -323,7 +323,7 @@ namespace ClassLibrary
             currentRow++; // 
 
             // Attacking midfielders (optional)
-            if (Option == "AM" || PitchPositions.Count == 5)
+            if (Option == "AM" || PitchPositions.Count == 6)
             {
                 for (int c = 0; c < PitchPositions[currentRow].Count; c++)
                 {

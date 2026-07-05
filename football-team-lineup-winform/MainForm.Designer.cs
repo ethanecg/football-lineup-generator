@@ -207,6 +207,7 @@
             // 
             // tlpFormation
             // 
+            tlpFormation.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tlpFormation.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tlpFormation.ColumnCount = 1;
             tlpFormation.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));

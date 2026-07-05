@@ -1,4 +1,5 @@
 using ClassLibrary;
+using System.Numerics;
 using System.Security.Policy;
 
 namespace football_team_lineup_winform
@@ -12,22 +13,11 @@ namespace football_team_lineup_winform
         {
             InitializeComponent();
 
-            #region idk what name
-
-            btnGenerate.Visible = false;
-            btnModify.Visible = false;
-            btnDelete.Visible = false;
-
-            txtFormationTitle.Visible = false;
-            txtFormation.Visible = false;
-            txtOptionTitle.Visible = false;
-            cboOption.Visible = false;
+            SetButtonsVisibility(false);
 
             cboOption.Items.Add("AM");
             cboOption.Items.Add("DM");
             cboOption.SelectedIndex = 0;
-
-            #endregion
         }
 
         private void SetButtonsVisibility(bool visible)
@@ -40,6 +30,15 @@ namespace football_team_lineup_winform
             txtFormation.Visible = visible;
             txtOptionTitle.Visible = visible;
             cboOption.Visible = visible;
+
+            tlpFormation.Visible = visible;
+        }
+
+        private void ResetFormation()
+        {
+            tlpFormation.RowCount = 1;
+            tlpFormation.RowStyles.Clear();
+            tlpFormation.Controls.Clear();
         }
 
         private void btnTeam_Click(object sender, EventArgs e)
@@ -53,6 +52,7 @@ namespace football_team_lineup_winform
                     txtSelectedTeam.ForeColor = Color.Green;
 
                     SetButtonsVisibility(true);
+                    ResetFormation();
                 }
             }
         }
@@ -71,7 +71,9 @@ namespace football_team_lineup_winform
                 SelectedTeam = null;
                 txtSelectedTeam.Text = $"no team selected";
                 txtSelectedTeam.ForeColor = Color.Red;
+
                 SetButtonsVisibility(false);
+                ResetFormation();
             }
         }
 
@@ -91,7 +93,7 @@ namespace football_team_lineup_winform
             bool valid = false;
             try
             {
-                Lineup lineup = new Lineup(txtFormation.Text, SelectedTeam, cboOption.SelectedText);
+                Lineup lineup = new Lineup(txtFormation.Text, SelectedTeam, cboOption.Text);
                 SelectedLineup = lineup;
                 valid = true;
             }
@@ -121,8 +123,36 @@ namespace football_team_lineup_winform
                 SelectedLineup.FillPitchPositions();
                 SelectedLineup.FillPitchPlayersWithRandomPlayers();
 
+                // Add table layout structure.
+                int rowNumberLayout = SelectedLineup.PitchPositions.Count;
+                for (int r = 0; r < SelectedLineup.PitchPositions.Count; r++)
+                {
+                    rowNumberLayout--;
+
+                    TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+                    tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                    tableLayoutPanel.ColumnCount = SelectedLineup.PitchPositions[r].Count;
+                    tableLayoutPanel.Dock = DockStyle.Fill;
+
+                    rowSize = 100f / tableLayoutPanel.ColumnCount;
+                    for (int i = 0; i < tableLayoutPanel.ColumnCount; i++)
+                    {
+                        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, rowSize));
+                    }
+
+                    for (int c = 0; c < SelectedLineup.PitchPositions[r].Count; c++)
+                    {
+                        Label label = new Label();
+                        label.Text = $"{SelectedLineup.PitchPlayers[r][c].LastName}\n{SelectedLineup.PitchPositions[r][c]}";
+                        label.TextAlign = ContentAlignment.MiddleCenter;
+                        label.Dock = DockStyle.Fill;
+                        tableLayoutPanel.Controls.Add(label, c, r);
+                    }
+
+                    tlpFormation.Controls.Add(tableLayoutPanel, 1, rowNumberLayout);
+                }
+
                 /*
-                // Add players to the new table layout.
                 int rowIndex = tlpFormation.RowCount;
                 foreach (List<Player> players in SelectedLineup.PitchPlayers)
                 {
@@ -130,10 +160,20 @@ namespace football_team_lineup_winform
                     
                     TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
                     tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-                 
+                    tableLayoutPanel.ColumnCount = SelectedLineup.PitchPositions[rowIndex].Count;
+                    rowSize = 100f / players.Count;
+                    for (int i = 0; i < tlpFormation.RowCount; i++)
+                    {
+                        tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, rowSize));
+                    }
+
+                    int colIndex = -1;
                     foreach (Player player in players)
                     {
-                        
+                        colIndex++;
+                        TextBox textBox = new TextBox();
+                        textBox.Text = $"{player.LastName}\n{SelectedLineup.PitchPositions[rowIndex][colIndex]}";
+                        tableLayoutPanel.Controls.Add(textBox);
                     }
 
                     tlpFormation.Controls.Add(tableLayoutPanel, 1, rowIndex);
