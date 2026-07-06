@@ -9,7 +9,7 @@ namespace ClassLibrary
     public class Team
     {
         private string _name;
-        private string _teamFilePath; // e.x, ..\..\..\..\Teams\arsenal.csv
+        private string _filePath; // e.x, ..\..\..\..\Teams\arsenal.csv
         private List<Player> _players;
 
         /// <exception cref="ArgumentNullException">Thrown when the name is empty or null.</exception>
@@ -20,7 +20,7 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException(nameof(value), "The name of the team cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(Name), "The name of the team cannot be empty or null.");
                 }
                 _name = value.ToLower().Trim();
             }
@@ -29,14 +29,14 @@ namespace ClassLibrary
         /// <summary>Set file location using the name of the team e.x, {name.csv}. If the file don't exist, create it. Also Create the Directory if it don't exist.</summary>
         /// <param name="value">The name of the team.</param>
         /// <exception cref="ArgumentNullException">Thrown when the value is null or empty.</exception>
-        public string TeamFilePath
+        public string FilePath
         {
-            get { return _teamFilePath; }
+            get { return _filePath; }
             private set
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException(nameof(value), "The file of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(FilePath), " cannot be null or empty.");
                 }
 
                 // In case the directroy Teams was remove.
@@ -50,7 +50,7 @@ namespace ClassLibrary
                     using (File.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv"))) { }
                 }
 
-                _teamFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv");
+                _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Teams", $"{value}.csv");
             }
         }
 
@@ -62,7 +62,7 @@ namespace ClassLibrary
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(value), "The list of player cannot be null.");
+                    throw new ArgumentNullException(nameof(Players), "The list of player cannot be null.");
                 }
                 _players = value;
             }
@@ -71,7 +71,7 @@ namespace ClassLibrary
         public Team(string name)
         {
             Name = name;
-            TeamFilePath = Name;
+            FilePath = Name;
             Players = new List<Player>();
             LoadPlayersFromFile();
         }
@@ -79,7 +79,7 @@ namespace ClassLibrary
         /// <summary>Write all players contain in 'Players' in the team file.</summary>
         public void SavePlayersToFile()
         {
-            using (StreamWriter writer = new StreamWriter(TeamFilePath))
+            using (StreamWriter writer = new StreamWriter(FilePath))
             {
                 foreach (Player p in Players)
                 {
@@ -93,25 +93,14 @@ namespace ClassLibrary
         /// <exception cref="Exception">Thrown if the player is in an incorrect format.</exception>
         public void LoadPlayersFromFile()
         {
-            using (StreamReader reader = new StreamReader(TeamFilePath))
+            using (StreamReader reader = new StreamReader(FilePath))
             {
                 while(!reader.EndOfStream)
                 {
                     string playerString = reader.ReadLine();
-
-                    string[] playerArray = playerString.Split(';'); //  e.x, [Ousmane Dembélé] , [ST,RW]
-
-                    if (playerArray.Count() != 2)
-                    {
-                        throw new FormatException("A player in the file is in an inccorect format. Make sure there is only one ';'.");
-                    }
-                        
-                    string playerFullName = playerArray[0];
-                    string[] playerFieldPositionArray = playerArray[1].Split(",");
-
                     try
                     {
-                        Players.Add(new Player(playerFullName, playerFieldPositionArray.ToList()));
+                        Players.Add(new Player(playerString));
                     }
                     catch (Exception ex)
                     {
@@ -124,7 +113,7 @@ namespace ClassLibrary
         /// <summary>Clear the file and Clear the list 'PlayerList'.</summary>
         public void EmptyFileAndClearPlayers()
         {
-            using (StreamWriter writer = new StreamWriter(TeamFilePath, append: false)) { }
+            using (StreamWriter writer = new StreamWriter(FilePath, append: false)) { }
             Players.Clear();
         }
     }

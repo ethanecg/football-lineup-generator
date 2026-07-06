@@ -58,9 +58,9 @@ namespace TestClass
 
             Assert.Throws<ArgumentNullException>(() => new Lineup("", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -73,9 +73,9 @@ namespace TestClass
 
             Assert.Throws<ArgumentNullException>(() => new Lineup(null, validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -88,9 +88,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("1-4-A-2", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -103,9 +103,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("1-5-5", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -118,9 +118,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("1-2-2-2-2-1-1", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -133,9 +133,9 @@ namespace TestClass
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-1", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -148,9 +148,9 @@ namespace TestClass
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Lineup("1-4-4-3", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -163,9 +163,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("2-4-4-1", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -178,9 +178,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("1-4-4-0-2", validTeam));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
         #endregion
@@ -203,9 +203,9 @@ namespace TestClass
 
             Assert.Throws<ArgumentNullException>(() => new Lineup("1-4-4-1-1", validTeam, null));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
 
@@ -218,9 +218,9 @@ namespace TestClass
 
             Assert.Throws<FormatException>(() => new Lineup("1-4-4-1-1", validTeam, "CM"));
 
-            if (File.Exists(validTeam.TeamFilePath))
+            if (File.Exists(validTeam.FilePath))
             {
-                File.Delete(validTeam.TeamFilePath);
+                File.Delete(validTeam.FilePath);
             }
         }
         #endregion

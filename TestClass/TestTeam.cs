@@ -24,7 +24,7 @@ namespace TestClass
             {
                 listofFailures.Add($"The expected name {validPlayerName} does not equal the returned name {team.Name}");
             }
-            if (!File.Exists(team.TeamFilePath))
+            if (!File.Exists(team.FilePath))
             {
                 listofFailures.Add($"The expected name {validPlayerName} does not equal the returned name {team.Name}");
             }
@@ -34,9 +34,9 @@ namespace TestClass
                 Assert.Fail("TestCreateValidPlayer failed with the following errors:\n" + string.Join("\n", listofFailures));
             }
 
-            if (File.Exists(team.TeamFilePath))
+            if (File.Exists(team.FilePath))
             {
-                File.Delete(team.TeamFilePath);
+                File.Delete(team.FilePath);
             }
         }
 
@@ -64,9 +64,9 @@ namespace TestClass
             Assert.AreEqual(1, team.Players.Count());
 
             // Delete the file.
-            if (File.Exists(team.TeamFilePath))
+            if (File.Exists(team.FilePath))
             {
-                File.Delete(team.TeamFilePath);
+                File.Delete(team.FilePath);
             }
         }
 
@@ -81,7 +81,7 @@ namespace TestClass
 
             team.SavePlayersToFile();
 
-            using (StreamReader reader = new StreamReader(team.TeamFilePath))
+            using (StreamReader reader = new StreamReader(team.FilePath))
             {
                 while (!reader.EndOfStream)
                 {
@@ -91,9 +91,9 @@ namespace TestClass
             }
 
             // Delete the file.
-            if (File.Exists(team.TeamFilePath))
+            if (File.Exists(team.FilePath))
             {
-                File.Delete(team.TeamFilePath);
+                File.Delete(team.FilePath);
             }
         }
 
@@ -106,7 +106,7 @@ namespace TestClass
 
             Player player = new Player(validPlayerName, validPositions);
 
-            using (StreamWriter writer = new StreamWriter(team.TeamFilePath))
+            using (StreamWriter writer = new StreamWriter(team.FilePath))
             {
                 writer.WriteLine($"{player.ToCsvFormat()}");
             }
@@ -119,9 +119,9 @@ namespace TestClass
             Assert.AreEqual(expectedValue[0].ToCsvFormat(), team.Players[0].ToCsvFormat());
 
             // Delete the file.
-            if (File.Exists(team.TeamFilePath))
+            if (File.Exists(team.FilePath))
             {
-                File.Delete(team.TeamFilePath);
+                File.Delete(team.FilePath);
             }
         }
 
@@ -141,7 +141,7 @@ namespace TestClass
             Assert.AreEqual(0, team.Players.Count());
 
             int count = 0;
-            using (StreamReader reader = new StreamReader(team.TeamFilePath))
+            using (StreamReader reader = new StreamReader(team.FilePath))
             {
                 while (!reader.EndOfStream)
                 {
@@ -151,9 +151,9 @@ namespace TestClass
             Assert.AreEqual(0, count);
 
             // Delete the file.
-            if (File.Exists(team.TeamFilePath))
+            if (File.Exists(team.FilePath))
             {
-                File.Delete(team.TeamFilePath);
+                File.Delete(team.FilePath);
             }
         }
     }

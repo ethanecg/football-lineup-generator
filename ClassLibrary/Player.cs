@@ -10,16 +10,13 @@ namespace ClassLibrary
         private string _lastName;
         private List<string> _fieldPositions;
 
-        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
         public string FirstName
         {
             get { return _firstName; }
             set
             {
-                if (value == null || value.ToLower().Replace(" ", "") == "")
-                {
-                    throw new ArgumentNullException(nameof(value), "The first name of the player cannot be empty or null.");
-                }
+                // can be empty.
+                value.ToLower().Replace(" ", "");
                 _firstName = value;
             }
         }
@@ -32,7 +29,7 @@ namespace ClassLibrary
             {
                 if (value == null || value.ToLower().Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException(nameof(value), "The last name of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(LastName), " of the player cannot be empty or null.");
                 }
                 _lastName = value;
             }
@@ -48,7 +45,7 @@ namespace ClassLibrary
             {
                 if (value == null || value.Count == 0)
                 {
-                    throw new ArgumentNullException(nameof(value) ,"The name of the player cannot be empty or null.");
+                    throw new ArgumentNullException(nameof(FieldPositions), " cannot be empty or null.");
                 }
                 foreach (string fp in value) // Check if the fp match a value in validFieldPositions.
                 {
@@ -70,8 +67,7 @@ namespace ClassLibrary
         }
 
         /// <param name="playerCsv">The fullname and the position of a player in a csv format.</param>
-        /// <exception cref="ArgumentNullException">Thrown if the fullname is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if the fullname is null or empty.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the last name of the player is empty or null.</exception>
         /// <exception cref="ArgumentNullException">Thrown if the list of field positions is null or empty.</exception>
         /// <exception cref="ArgumentException">Thrown if a field position is not allowed.</exception>
@@ -82,61 +78,39 @@ namespace ClassLibrary
             string fieldPositions = player[1];
 
             // Name
-            if (fullName == null)
+            if (fullName == null || fullName.Replace(" ", "") == "")
             {
-                throw new ArgumentNullException(nameof(fullName), "The full name cannot be null");
+                throw new ArgumentNullException(nameof(fullName), "The full name cannot be null or empty.");
             }
-            string[] nameArray = fullName.Split(" ");
-            FirstName = nameArray[0];
-            string lastName = "";
+
+            fullName.Trim();
+            string[] nameArray = fullName.Split(" "); //  The first name and last name are expected to be separated by a space.
+
+            if (nameArray.Count() == 1) // Only last name like Vitinha
+            {
+                LastName = nameArray[0];
+            }
+            else
+            {
+                FirstName = nameArray[0];
+                string lastName = "";
                 // In case the player have two last name.
-            for (int i = 1; i < nameArray.Count(); i++)
-            {
-                if (i == nameArray.Count() - 1)
+                for (int i = 1; i < nameArray.Count(); i++)
                 {
-                    lastName += $"{nameArray[i]}";
+                    if (i == nameArray.Count() - 1)
+                    {
+                        lastName += $"{nameArray[i]}";
+                    }
+                    else
+                    {
+                        lastName += $"{nameArray[i]} ";
+                    }
                 }
-                else
-                {
-                    lastName += $"{nameArray[i]} ";
-                }
+                LastName = lastName;
             }
-            LastName = lastName;
 
             // Field position
             FieldPositions = fieldPositions.Split(',').ToList();
-        }
-
-        /// <param name="fullName">The first name and last name of a player separated by a space.</param>
-        /// <param name="fieldPositions">A list of allowed field positions.</param>
-        /// <exception cref = "ArgumentNullException"> Thrown if the fullname is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the first name of the player is empty or null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the last name of the player is empty or null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if the list of field positions is null or empty.</exception>
-        /// <exception cref="ArgumentException">Thrown if a field position is not allowed.</exception>
-        public Player(string fullName, List<string> fieldPositions)
-        {
-            if (fullName == null)
-            {
-                throw new ArgumentNullException(nameof(fullName), "The full name cannot be null");
-            }
-            string[] nameArray = fullName.Split(" ");
-            FirstName = nameArray[0];
-            string lastName = "";
-            // In case the player have two last name.
-            for (int i = 1; i < nameArray.Count(); i++)
-            {
-                if (i == nameArray.Count() - 1)
-                {
-                    lastName += $"{nameArray[i]}";
-                }
-                else
-                {
-                    lastName += $"{nameArray[i]} ";
-                }
-            }
-            LastName = lastName;
-            FieldPositions = fieldPositions;
         }
 
         /// <summary>Transform the player into a text so it can be store in a csv file.</summary>

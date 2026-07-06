@@ -30,7 +30,7 @@ namespace ClassLibrary
             {
                 if (value == null || value.Replace(" ", "") == "")
                 {
-                    throw new ArgumentNullException(nameof(value), " cannot be null nor empty.");
+                    throw new ArgumentNullException(nameof(Formation), " cannot be null nor empty.");
                 }
                 value = value.Replace(" ", "");
                 string[] lineUpStringArray = value.Split('-');
@@ -48,7 +48,7 @@ namespace ClassLibrary
                 {
                     if (int.TryParse(v, out int r) == false)
                     {
-                        throw new FormatException($"Fail to convert the value {v} into an int.");
+                        throw new FormatException($"Fail to convert the value '{v}' into an int.");
                     }
                     else if (r == 0)
                     {
@@ -84,7 +84,7 @@ namespace ClassLibrary
                 }
                 if (count != 11)
                 {
-                    throw new FormatException("The number of players must be 11.");
+                    throw new FormatException($"The number of players in {nameof(PitchPlayers)} must be 11.");
                 }
 
                 _pitchPlayers = value;
@@ -107,7 +107,7 @@ namespace ClassLibrary
                 }
                 if (count != 11)
                 {
-                    throw new FormatException("The number of positions on the pitch should be be 11.");
+                    throw new FormatException($"The number of positions in {nameof(PitchPlayers)} should be be 11.");
                 }
 
                 _pitchPositions = value;
@@ -122,11 +122,11 @@ namespace ClassLibrary
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(value), " cannot be null.");
+                    throw new ArgumentNullException(nameof(Team), " cannot be null.");
                 }
                 else if (value.Players.Count < 11)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), " The number of players in the team must be at least 11.");
+                    throw new ArgumentOutOfRangeException(nameof(Team), " The number of players in the team must be at least 11.");
                 }
                 _team = value;
             }
@@ -148,7 +148,7 @@ namespace ClassLibrary
                 {
                     if (value == null)
                     {
-                        throw new ArgumentNullException(nameof(value), " cannot be null.");
+                        throw new ArgumentNullException(nameof(Option), " cannot be null.");
                     }
                     value = value.Replace(" ", "");
                     if (value == "DM" || value == "AM")
@@ -367,7 +367,7 @@ namespace ClassLibrary
         {
             if (PitchPlayers.Count != PitchPositions.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(PitchPlayers), " don't have the same number of rows.");
+                throw new ArgumentOutOfRangeException(nameof(PitchPlayers), " don't have the same number of rows as PitchPositions.");
             }
             for (int r = 0; r < PitchPlayers.Count; r++)
             {
@@ -383,7 +383,7 @@ namespace ClassLibrary
                 }
                 if (countPlayers != countPositions)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(PitchPlayers), " don't have the same number of columns");
+                    throw new ArgumentOutOfRangeException(nameof(PitchPlayers), " don't have the same number of columns as PitchPositions");
                 }
             }
             
@@ -406,7 +406,7 @@ namespace ClassLibrary
         public bool HasEnoughPlayers()
         {
             int count = 0;
-            using (StreamReader reader = new StreamReader(Team.TeamFilePath))
+            using (StreamReader reader = new StreamReader(Team.FilePath))
             {
                 while (!reader.EndOfStream)
                 {

@@ -27,7 +27,7 @@ namespace football_team_lineup_winform
 
         private void MakeFileContentAppear()
         {
-            using (StreamReader reader = new StreamReader(SelectedTeam.TeamFilePath))
+            using (StreamReader reader = new StreamReader(SelectedTeam.FilePath))
             {
                 string fullText = "";
                 while (!reader.EndOfStream)
@@ -87,7 +87,7 @@ namespace football_team_lineup_winform
             // Save
             if (valid)
             {
-                using (StreamWriter writer = new StreamWriter(SelectedTeam.TeamFilePath))
+                using (StreamWriter writer = new StreamWriter(SelectedTeam.FilePath))
                 {
                     using (StringReader reader = new StringReader(rtbPlayers.Text))
                     {

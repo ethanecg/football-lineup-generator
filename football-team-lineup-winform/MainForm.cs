@@ -67,7 +67,7 @@ namespace football_team_lineup_winform
                 );
             if (result == DialogResult.Yes)
             {
-                File.Delete(SelectedTeam.TeamFilePath);
+                File.Delete(SelectedTeam.FilePath);
                 SelectedTeam = null;
                 txtSelectedTeam.Text = $"no team selected";
                 txtSelectedTeam.ForeColor = Color.Red;
@@ -151,34 +151,6 @@ namespace football_team_lineup_winform
 
                     tlpFormation.Controls.Add(tableLayoutPanel, 1, rowNumberLayout);
                 }
-
-                /*
-                int rowIndex = tlpFormation.RowCount;
-                foreach (List<Player> players in SelectedLineup.PitchPlayers)
-                {
-                    rowIndex--;
-                    
-                    TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-                    tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-                    tableLayoutPanel.ColumnCount = SelectedLineup.PitchPositions[rowIndex].Count;
-                    rowSize = 100f / players.Count;
-                    for (int i = 0; i < tlpFormation.RowCount; i++)
-                    {
-                        tlpFormation.RowStyles.Add(new RowStyle(SizeType.Percent, rowSize));
-                    }
-
-                    int colIndex = -1;
-                    foreach (Player player in players)
-                    {
-                        colIndex++;
-                        TextBox textBox = new TextBox();
-                        textBox.Text = $"{player.LastName}\n{SelectedLineup.PitchPositions[rowIndex][colIndex]}";
-                        tableLayoutPanel.Controls.Add(textBox);
-                    }
-
-                    tlpFormation.Controls.Add(tableLayoutPanel, 1, rowIndex);
-                }
-                */
             }
         }
     }
