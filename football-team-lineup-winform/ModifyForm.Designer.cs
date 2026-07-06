@@ -133,6 +133,7 @@
             ClientSize = new Size(784, 461);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
+            MinimumSize = new Size(800, 500);
             Name = "ModifyForm";
             Text = "ModifyForm";
             tableLayoutPanel1.ResumeLayout(false);

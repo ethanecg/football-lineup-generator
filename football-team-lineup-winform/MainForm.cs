@@ -18,6 +18,8 @@ namespace football_team_lineup_winform
             cboOption.Items.Add("AM");
             cboOption.Items.Add("DM");
             cboOption.SelectedIndex = 0;
+
+            tlpFormation.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
         }
 
         private void SetButtonsVisibility(bool visible)
@@ -83,7 +85,7 @@ namespace football_team_lineup_winform
             {
                 if (modifyForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Do nothing.
+                    SelectedTeam = new Team(SelectedTeam.Name); // Refresh player
                 }
             }
         }
@@ -109,6 +111,7 @@ namespace football_team_lineup_winform
             if (valid)
             {
                 // Add tlpFormation rows and format it well.
+                ResetFormation();
                 int rowNumber = SelectedLineup.PitchPositions.Count();
                 tlpFormation.RowCount = rowNumber;
                 tlpFormation.RowStyles.Clear();
@@ -123,14 +126,13 @@ namespace football_team_lineup_winform
                 SelectedLineup.FillPitchPositions();
                 SelectedLineup.FillPitchPlayersWithRandomPlayers();
 
-                // Add table layout structure.
+                // Add table layout structure and fill with players.
                 int rowNumberLayout = SelectedLineup.PitchPositions.Count;
                 for (int r = 0; r < SelectedLineup.PitchPositions.Count; r++)
                 {
                     rowNumberLayout--;
 
                     TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-                    tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
                     tableLayoutPanel.ColumnCount = SelectedLineup.PitchPositions[r].Count;
                     tableLayoutPanel.Dock = DockStyle.Fill;
 
@@ -145,7 +147,8 @@ namespace football_team_lineup_winform
                         Label label = new Label();
                         label.Text = $"{SelectedLineup.PitchPlayers[r][c].LastName}\n{SelectedLineup.PitchPositions[r][c]}";
                         label.TextAlign = ContentAlignment.MiddleCenter;
-                        label.Dock = DockStyle.Fill;
+                        label.BorderStyle = BorderStyle.FixedSingle;
+                        label.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
                         tableLayoutPanel.Controls.Add(label, c, r);
                     }
 

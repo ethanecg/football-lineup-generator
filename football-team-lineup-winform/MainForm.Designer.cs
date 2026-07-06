@@ -229,6 +229,7 @@
             Controls.Add(tlpSecondaryLayout);
             Controls.Add(tlpMainLayout);
             Controls.Add(txtTitle);
+            MinimumSize = new Size(800, 500);
             Name = "MainForm";
             Text = "MainForm";
             tlpMainLayout.ResumeLayout(false);

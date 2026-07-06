@@ -102,6 +102,7 @@
             ClientSize = new Size(384, 361);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(lstTeam);
+            MinimumSize = new Size(400, 400);
             Name = "TeamForm";
             Text = "TeamForm";
             tableLayoutPanel1.ResumeLayout(false);

@@ -118,6 +118,7 @@
             ClientSize = new Size(334, 111);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(tlpMainLayout);
+            MinimumSize = new Size(350, 150);
             Name = "CreateForm";
             Text = "CreateFrom";
             tlpMainLayout.ResumeLayout(false);
