@@ -17,3 +17,4 @@ This project helped me deepen my knowledge with winform. It also made me practic
 - Unzip the folder.
 - launch football-lineup-generator-winform.exe
 # 👀 Demonstration
+https://github.com/user-attachments/assets/6bda8319-8e90-453d-a2d7-87a4d63bfc79
